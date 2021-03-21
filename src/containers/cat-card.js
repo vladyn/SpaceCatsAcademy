@@ -7,7 +7,7 @@ import { colors, mq } from "../styles";
  * Track Card component renders basic info in a card format
  * for each track populating the tracks grid homepage.
  */
-const TrackCard = ({ track }) => {
+const CatCard = ({ track }) => {
   const { id, photo, name, missions, age } = track;
 
   return (
@@ -18,17 +18,12 @@ const TrackCard = ({ track }) => {
         </CardImageContainer>
         <CardBody>
           <CardTitle>{name || ""}</CardTitle>
-          <CardSection>
-            <p>Age: {age}</p>
-            <dl>
-              {missions.map((mission) => (
-                <CardContent key={mission.id}>
-                  <dt>{mission.name}</dt>
-                  <dd>{mission.description}</dd>
-                </CardContent>
-              ))}
-            </dl>
-          </CardSection>
+          <p>Age: {age}</p>
+          <ul>
+            {missions.map((mission) => (
+                <li key={mission.id}>{mission.name}, {mission.description}</li>
+            ))}
+          </ul>
           <CardFooter>
             <AuthorImage src={photo} />
             <AuthorAndTrack>
@@ -41,7 +36,7 @@ const TrackCard = ({ track }) => {
   );
 };
 
-export default TrackCard;
+export default CatCard;
 
 /** Track Card styled components */
 const CardContainer = styled.div({

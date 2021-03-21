@@ -1,6 +1,6 @@
 import React from "react";
 import { renderApollo, cleanup, waitForElement } from "../../utils/test-utils";
-import TrackCard from "../track-card";
+import CatCard from "../cat-card";
 
 const mockTrackCardData = {
   id: "c_0",
@@ -22,7 +22,7 @@ describe("Track Card", () => {
   it("renders track Card", async () => {
     const mocks = [];
     const { getByText } = await renderApollo(
-      <TrackCard track={mockTrackCardData} />,
+      <CatCard track={mockTrackCardData} />,
       {
         mocks,
         resolvers: {},

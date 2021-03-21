@@ -1,7 +1,8 @@
 import React from "react";
 import { Layout } from "../components";
 import { useQuery, gql } from "@apollo/client";
-import TrackCard from "../containers/track-card";
+import CatCard from "../containers/cat-card";
+import QueryResult from '../components/query-result';
 
 /**
  * Cats Page is the Catstronauts home page.
@@ -26,14 +27,13 @@ const SPACECATS = gql`
 
 const Cats = () => {
   const { loading, error, data } = useQuery(SPACECATS);
-
-  if (loading) return <p>Loading...</p>;
-  if (error) return <strong>Error! {error.message}</strong>;
   return (
     <Layout grid>
-      {data?.spaceCats?.map((cat) => (
-        <TrackCard key={cat.id} track={cat} />
-      ))}
+      <QueryResult error={error} data={data} loading={loading}>
+        {data?.spaceCats?.map((cat) => (
+          <CatCard key={cat.id} track={cat} />
+        ))}
+      </QueryResult>
     </Layout>
   );
 };
