@@ -8,17 +8,17 @@ import { colors, mq } from "../styles";
  * for each track populating the tracks grid homepage.
  */
 const CatCard = ({ track }) => {
-  const { id, photo, name, missions, age } = track;
+  const { entry_id, photo, title, missions, description } = track;
 
   return (
-    <CardContainer id={id}>
+    <CardContainer id={entry_id}>
       <CardContent>
         <CardImageContainer>
-          <CardImage src={photo} alt={name} />
+          <CardImage src={photo} alt={title} />
         </CardImageContainer>
         <CardBody>
-          <CardTitle>{name || ""}</CardTitle>
-          <p>Age: {age}</p>
+          <CardTitle>{title || ""}</CardTitle>
+          <p>{description}</p>
           <ul>
             {missions.map((mission) => (
                 <li key={mission.id}>{mission.name}, {mission.description}</li>
@@ -27,7 +27,7 @@ const CatCard = ({ track }) => {
           <CardFooter>
             <AuthorImage src={photo} />
             <AuthorAndTrack>
-              <AuthorName>{name}</AuthorName>
+              <AuthorName>{title}</AuthorName>
             </AuthorAndTrack>
           </CardFooter>
         </CardBody>
