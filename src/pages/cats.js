@@ -12,12 +12,12 @@ import QueryResult from '../components/query-result';
 const SPACECATS = gql`
   query catDetails {
     spaceCats {
-      name
-      age
-      id
+      title
+      entry_id
       photo
+      description
       missions {
-        id
+        row_id
         name
         description
       }
@@ -31,7 +31,7 @@ const Cats = () => {
     <Layout grid>
       <QueryResult error={error} data={data} loading={loading}>
         {data?.spaceCats?.map((cat) => (
-          <CatCard key={cat.id} track={cat} />
+          <CatCard key={cat.entry_id} track={cat} />
         ))}
       </QueryResult>
     </Layout>
