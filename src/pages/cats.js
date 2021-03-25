@@ -2,7 +2,7 @@ import React from "react";
 import { Layout } from "../components";
 import { useQuery, gql } from "@apollo/client";
 import CatCard from "../containers/cat-card";
-import QueryResult from '../components/query-result';
+import QueryResult from "../components/query-result";
 
 /**
  * Cats Page is the Catstronauts home page.

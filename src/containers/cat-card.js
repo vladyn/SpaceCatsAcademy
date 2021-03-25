@@ -19,11 +19,14 @@ const CatCard = ({ track }) => {
         <CardBody>
           <CardTitle>{title || ""}</CardTitle>
           <p>{description}</p>
-          <ul>
-            {missions.map((mission) => (
-                <li key={mission.id}>{mission.name}, {mission.description}</li>
-            ))}
-          </ul>
+          {missions.map((mission) => (
+            <CardSection
+              key={mission.row_id}
+              heading={mission.name}
+              description={mission.description}
+              actions={() => {}}
+            />
+          ))}
           <CardFooter>
             <AuthorImage src={photo} />
             <AuthorAndTrack>

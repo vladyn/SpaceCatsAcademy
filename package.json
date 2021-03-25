@@ -19,9 +19,9 @@
     "react-scripts": "^4.0.1"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "react-scripts start && pretty-check",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "react-scripts test && pretty-check",
     "eject": "react-scripts eject",
     "pretty-check": "prettier --check .",
     "pretty": "prettier --write ."
