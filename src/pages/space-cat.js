@@ -11,11 +11,20 @@ import QueryResult from "../components/query-result";
 const SPACECATS = gql`
   query getSirma($catName: String) {
     getCat(name: $catName) {
+      channel_id
+      author_id
+      entry_date
+      edit_date
+      expiration_date
+      author_id
       title
-      description
+      url_title
+      entry_id
       photo
+      description
       missions {
         row_id
+        name
         description
       }
     }
@@ -32,9 +41,7 @@ const SpaceCat = ({ name }) => {
   return (
     <Layout fullWidth>
       <QueryResult error={error} data={data} loading={loading}>
-        <CatDetail track={data?.getCat}>
-          <h4>{data?.getCat?.title}</h4>
-        </CatDetail>
+        <CatDetail cat={data?.getCat} />
       </QueryResult>
     </Layout>
   );

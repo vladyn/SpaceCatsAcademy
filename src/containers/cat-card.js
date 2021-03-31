@@ -1,4 +1,5 @@
 import { CardSection } from "@apollo/space-kit/Card";
+import { Link } from "@reach/router";
 import React from "react";
 import styled from "@emotion/styled";
 import { colors, mq } from "../styles";
@@ -7,8 +8,8 @@ import { colors, mq } from "../styles";
  * Track Card component renders basic info in a card format
  * for each track populating the tracks grid homepage.
  */
-const CatCard = ({ track }) => {
-  const { entry_id, photo, title, missions, description } = track;
+const CatCard = ({ cat }) => {
+  const { entry_id, url_title, photo, title, missions, description } = cat;
 
   return (
     <CardContainer id={entry_id}>
@@ -30,7 +31,9 @@ const CatCard = ({ track }) => {
           <CardFooter>
             <AuthorImage src={photo} />
             <AuthorAndTrack>
-              <AuthorName>{title}</AuthorName>
+              <AuthorName>
+                <Link to={`/cat/${url_title}`}>Permanent Link</Link>
+              </AuthorName>
             </AuthorAndTrack>
           </CardFooter>
         </CardBody>

@@ -18,7 +18,7 @@ import MarkDown from "./md-content";
  * author, length, number of views, missions list, among other things.
  * It provides access to the first module of the track.
  */
-const CatDetail = ({ track }) => {
+const CatDetail = ({ cat }) => {
   const {
     title,
     description,
@@ -27,7 +27,8 @@ const CatDetail = ({ track }) => {
     modulesCount,
     missions,
     numberOfViews,
-  } = track;
+    url_title,
+  } = cat;
 
   return (
     <ContentSection>
@@ -57,6 +58,11 @@ const CatDetail = ({ track }) => {
             <AuthorImage src={photo} />
             <AuthorName>{title}</AuthorName>
           </DetailItem>
+          <DetailItem>
+            <h4>
+              <Link to={`/cat/${url_title}`}>Permanent Link</Link>
+            </h4>
+          </DetailItem>
           <div>
             <StyledLink to={`./module/${missions[0]["id"]}`}>
               <Button
@@ -73,11 +79,11 @@ const CatDetail = ({ track }) => {
           <DetailItem>
             <h4>Missions</h4>
             <ul>
-              {missions.map((module) => (
-                <li key={module.title}>
-                  <div>{module.title}</div>
+              {missions.map((mission) => (
+                <li key={mission.row_id}>
+                  <div>{mission.title}</div>
                   <ModuleLength>
-                    {humanReadableTimeFromSeconds(module.length)}
+                    {humanReadableTimeFromSeconds(mission.length)}
                   </ModuleLength>
                 </li>
               ))}
