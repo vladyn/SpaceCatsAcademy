@@ -18,7 +18,7 @@ import MarkDown from "./md-content";
  * author, length, number of views, missions list, among other things.
  * It provides access to the first module of the track.
  */
-const CatDetail = ({ track }) => {
+const CatDetail = ({ cat }) => {
   const {
     title,
     description,
@@ -27,7 +27,7 @@ const CatDetail = ({ track }) => {
     modulesCount,
     missions,
     numberOfViews,
-  } = track;
+  } = cat;
 
   return (
     <ContentSection>
