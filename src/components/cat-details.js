@@ -27,6 +27,7 @@ const CatDetail = ({ cat }) => {
     modulesCount,
     missions,
     numberOfViews,
+    url_title,
   } = cat;
 
   return (
@@ -57,6 +58,11 @@ const CatDetail = ({ cat }) => {
             <AuthorImage src={photo} />
             <AuthorName>{title}</AuthorName>
           </DetailItem>
+          <DetailItem>
+            <h4>
+              <Link to={`/cat/${url_title}`}>Permanent Link</Link>
+            </h4>
+          </DetailItem>
           <div>
             <StyledLink to={`./module/${missions[0]["id"]}`}>
               <Button
@@ -73,11 +79,11 @@ const CatDetail = ({ cat }) => {
           <DetailItem>
             <h4>Missions</h4>
             <ul>
-              {missions.map((module) => (
-                <li key={module.title}>
-                  <div>{module.title}</div>
+              {missions.map((mission) => (
+                <li key={mission.row_id}>
+                  <div>{mission.title}</div>
                   <ModuleLength>
-                    {humanReadableTimeFromSeconds(module.length)}
+                    {humanReadableTimeFromSeconds(mission.length)}
                   </ModuleLength>
                 </li>
               ))}

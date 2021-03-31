@@ -1,4 +1,5 @@
 import { CardSection } from "@apollo/space-kit/Card";
+import { Link } from "@reach/router";
 import React from "react";
 import styled from "@emotion/styled";
 import { colors, mq } from "../styles";
@@ -30,7 +31,9 @@ const CatCard = ({ cat }) => {
           <CardFooter>
             <AuthorImage src={photo} />
             <AuthorAndTrack>
-              <AuthorName>{title}</AuthorName>
+              <AuthorName>
+                <Link to={`/cat/${url_title}`}>Permanent Link</Link>
+              </AuthorName>
             </AuthorAndTrack>
           </CardFooter>
         </CardBody>

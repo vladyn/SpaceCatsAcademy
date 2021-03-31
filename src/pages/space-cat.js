@@ -41,9 +41,7 @@ const SpaceCat = ({ name }) => {
   return (
     <Layout fullWidth>
       <QueryResult error={error} data={data} loading={loading}>
-        <CatDetail track={data?.getCat}>
-          <h4>{data?.getCat?.title}</h4>
-        </CatDetail>
+        <CatDetail cat={data?.getCat} />
       </QueryResult>
     </Layout>
   );
