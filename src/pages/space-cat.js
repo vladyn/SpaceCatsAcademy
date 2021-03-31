@@ -22,10 +22,10 @@ const SPACECATS = gql`
   }
 `;
 
-const SpaceCat = ({ catName }) => {
+const SpaceCat = ({ name }) => {
   const { loading, error, data } = useQuery(SPACECATS, {
     variables: {
-      catName,
+      catName: name,
     },
   });
 
