@@ -8,7 +8,7 @@ import About from "./about";
 export default function Pages() {
   return (
     <Router primary={false} component={Fragment}>
-      <About path="/about" />
+      <About path="/" />
       <Cats path="/cats" />
       <SpaceCat path="/cat/:name" />
     </Router>
