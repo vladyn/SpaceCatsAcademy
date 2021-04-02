@@ -2,7 +2,7 @@ import React from "react";
 import { colors, widths } from "../styles";
 import styled from "@emotion/styled";
 import { Link } from "@reach/router";
-import logo from "../assets/space_cat_logo.png";
+import logo from "../assets/tt_Logo_Symbol.png";
 
 /**
  * Header renders the top navigation
@@ -19,8 +19,8 @@ const Header = ({ children }) => {
                 <Logo src={logo} />
               </LogoContainer>
               <Title>
-                <h3>Catstronaut</h3>
-                <div>Kitty space academy</div>
+                <h3>Technology Talents</h3>
+                <div>The career elevation experts for many happy stories</div>
               </Title>
             </HomeButton>
           </HomeLink>
@@ -72,8 +72,8 @@ const HomeButton = styled.div({
 const LogoContainer = styled.div({ display: "flex", alignSelf: "center" });
 
 const Logo = styled.img({
-  height: 60,
-  width: 60,
+  height: 104,
+  width: 104,
   marginRight: 8,
 });
 

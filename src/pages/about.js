@@ -1,8 +1,11 @@
+import { Link } from "@reach/router";
 import React from "react";
 import { useQuery, gql } from "@apollo/client";
-import MarkDown from "../components/md-content";
-import { Layout } from "../components";
+// import MarkDown from "../components/md-content";
+import { Layout, ContentSection } from "../components";
 import QueryResult from "../components/query-result";
+import TTlogo from "../assets/tt_Logo.png";
+import TTlogoGrey from "../assets/tt_Logo_Grey.gif";
 
 /* The query */
 
@@ -26,10 +29,19 @@ const About = () => {
 
   return (
     <Layout fullWidth>
-      <QueryResult error={error} data={data} loading={loading}>
-        <h2>{data?.getPage?.title}</h2>
-        <MarkDown content={data?.getPage?.description} />
-      </QueryResult>
+      <ContentSection>
+        <QueryResult error={error} data={data} loading={loading}>
+          <h2>{data?.getPage?.title}</h2>
+          <p>Grey logo Example</p>
+          <img src={TTlogoGrey} alt="Technology Talents" />
+          <p>Logo on white</p>
+          <img src={TTlogo} alt="Technology Talents" />
+          <div
+            dangerouslySetInnerHTML={{ __html: data?.getPage?.description }}
+          />
+          <Link to="/cats">You can check out our Favorites here.</Link>
+        </QueryResult>
+      </ContentSection>
     </Layout>
   );
 };

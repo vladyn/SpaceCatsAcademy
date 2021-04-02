@@ -4,7 +4,7 @@
   "extensions": {
     "endpoints": {
       "Default GraphQL Endpoint": {
-        "url": "http://localhost:4000",
+        "url": "https://api.technologytalents.io/v1",
         "headers": {
           "user-agent": "JS GraphQL"
         },

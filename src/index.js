@@ -5,9 +5,14 @@ import Pages from "./pages";
 import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
 
 const client = new ApolloClient({
-  uri: "http://localhost:4000",
+  uri:
+    process.env.NODE_ENV === "development"
+      ? "http://localhost:4000"
+      : "https://api.technologytalents.io/v1",
   cache: new InMemoryCache(),
 });
+
+console.log(process.env.NODE_ENV);
 
 ReactDOM.render(
   <ApolloProvider client={client}>
