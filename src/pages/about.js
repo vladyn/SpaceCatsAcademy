@@ -1,6 +1,7 @@
 import { Link } from "@reach/router";
 import React from "react";
 import { useQuery, gql } from "@apollo/client";
+import DOMPurify from "dompurify";
 // import MarkDown from "../components/md-content";
 import { Layout, ContentSection } from "../components";
 import QueryResult from "../components/query-result";
@@ -27,6 +28,9 @@ const About = () => {
     },
   });
 
+  const dirty = data?.getPage?.description;
+  const clean = DOMPurify.sanitize(dirty);
+
   return (
     <Layout fullWidth>
       <ContentSection>
@@ -36,9 +40,7 @@ const About = () => {
           <img src={TTlogoGrey} alt="Technology Talents" />
           <p>Logo on white</p>
           <img src={TTlogo} alt="Technology Talents" />
-          <div
-            dangerouslySetInnerHTML={{ __html: data?.getPage?.description }}
-          />
+          <div dangerouslySetInnerHTML={{ __html: clean }} />
           <Link to="/cats">You can check out our Favorites here.</Link>
         </QueryResult>
       </ContentSection>
