@@ -2,7 +2,8 @@ import React from "react";
 import { colors, widths } from "../styles";
 import styled from "@emotion/styled";
 import { Link } from "@reach/router";
-import logo from "../assets/tt_Logo_Symbol.png";
+import logo from "../assets/logo.png";
+import MainNavigation from "./main-navigation";
 
 /**
  * Header renders the top navigation
@@ -17,15 +18,16 @@ const Header = ({ children }) => {
             <HomeButton>
               <LogoContainer>
                 <Logo src={logo} />
+                <Title>
+                  <h3>Technology Talents</h3>
+                  <div>The career elevation experts for many happy stories</div>
+                </Title>
               </LogoContainer>
-              <Title>
-                <h3>Technology Talents</h3>
-                <div>The career elevation experts for many happy stories</div>
-              </Title>
             </HomeButton>
           </HomeLink>
         </HomeButtonContainer>
         {children}
+        <MainNavigation />
       </Container>
     </HeaderBar>
   );
@@ -33,21 +35,25 @@ const Header = ({ children }) => {
 
 export default Header;
 
+const logoDimension = {
+  width: 132,
+  height: 28,
+};
+
 /** Header styled components */
 const HeaderBar = styled.div({
   display: "flex",
   flexDirection: "row",
   alignItems: "center",
   justifyContent: "center",
-  borderBottom: `solid 1px ${colors.pink.light}`,
-  boxShadow: "0px 1px 5px 0px rgba(0,0,0,0.15)",
   padding: "5px 30px",
-  minHeight: 80,
-  backgroundColor: "white",
+  minHeight: 100,
+  backgroundColor: "transparent",
 });
 
 const Container = styled.div({
   width: `${widths.regularPageWidth}px`,
+  display: "flex",
 });
 
 const HomeLink = styled(Link)({
@@ -56,7 +62,6 @@ const HomeLink = styled(Link)({
 
 const HomeButtonContainer = styled.div({
   display: "flex",
-  flex: 1,
 });
 
 const HomeButton = styled.div({
@@ -69,11 +74,17 @@ const HomeButton = styled.div({
   },
 });
 
-const LogoContainer = styled.div({ display: "flex", alignSelf: "center" });
+const LogoContainer = styled.div({
+  display: "flex",
+  alignSelf: "center",
+  width: logoDimension.width,
+  height: logoDimension.height,
+  overflow: "hidden",
+});
 
 const Logo = styled.img({
-  height: 104,
-  width: 104,
+  height: logoDimension.height,
+  width: logoDimension.width,
   marginRight: 8,
 });
 

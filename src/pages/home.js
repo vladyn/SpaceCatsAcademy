@@ -16,12 +16,12 @@ const ABOUT = gql`
   }
 `;
 
-/** About us page */
+/** Home page */
 
-const About = () => {
+const Home = () => {
   const { data, error, loading } = useQuery(ABOUT, {
     variables: {
-      page: "about",
+      page: "home",
     },
   });
 
@@ -41,4 +41,4 @@ const About = () => {
   );
 };
 
-export default About;
+export default Home;

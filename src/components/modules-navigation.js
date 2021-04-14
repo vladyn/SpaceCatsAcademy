@@ -3,6 +3,7 @@ import styled from "@emotion/styled";
 import { Link } from "@reach/router";
 import { colors, IconArrowRight, IconDoubleArrowRight } from "../styles";
 import { humanReadableTimeFromSeconds } from "../utils/helpers";
+import PropTypes from "prop-types";
 
 /**
  * Module Navigation: displays a list of modules titles
@@ -37,6 +38,11 @@ const ModulesNav = ({ module, track }) => {
       </ModulesList>
     </ModulesNavContainer>
   );
+};
+
+ModulesNav.propTypes = {
+  module: PropTypes.object,
+  track: PropTypes.object,
 };
 
 export default ModulesNav;
