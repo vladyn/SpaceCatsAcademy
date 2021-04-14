@@ -3,6 +3,13 @@ import ReactDOM from "react-dom";
 import GlobalStyles from "./styles";
 import Pages from "./pages";
 import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
+import WebFont from "webfontloader";
+
+WebFont.load({
+  google: {
+    families: ["Lato"],
+  },
+});
 
 const client = new ApolloClient({
   uri:

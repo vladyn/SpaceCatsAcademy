@@ -32,7 +32,7 @@ const GlobalStyles = () => (
       body: {
         margin: 0,
         padding: 0,
-        fontFamily: "'Source Sans Pro', sans-serif",
+        fontFamily: "'Lato', sans-serif",
         backgroundColor: colors.background,
         color: colors.text,
       },
@@ -40,7 +40,9 @@ const GlobalStyles = () => (
         display: "flex",
         flexDirection: "column",
         minHeight: "100%",
-        backgroundImage: 'url("/space_kitty_pattern.png")',
+        backgroundImage: 'url("/tt_background.webp")',
+        backgroundSize: "cover",
+        backgroundRepeat: "no-repeat",
       },
       "*": {
         boxSizing: "border-box",
