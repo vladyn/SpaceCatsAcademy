@@ -2,7 +2,7 @@ import React from "react";
 import { colors, widths } from "../styles";
 import styled from "@emotion/styled";
 import { Link } from "@reach/router";
-import logo from "../assets/logo.png";
+import logo from "../assets/tt_Logo.png";
 import MainNavigation from "./main-navigation";
 
 /**

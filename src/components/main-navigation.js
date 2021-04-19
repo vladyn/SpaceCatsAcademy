@@ -62,4 +62,18 @@ const NavList = styled.ul({
   textTransform: "uppercase",
   fontSize: 11,
   fontWeight: 800,
+  a: {
+    textDecoration: "none",
+    color: colors.mainNavPrimary,
+    display: "block",
+    padding: "1px 12px 32px 12px",
+  },
+  "a:hover": {
+    color: "#ABAC6C",
+  },
+  'a[aria-current="page"]': {
+    fontWeight: "bold",
+    fontFamily: "'Lato bold', sans-serif",
+    borderBottom: `2px solid ${colors.mainNavHoverBorderColor}`,
+  },
 });

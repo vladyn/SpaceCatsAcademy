@@ -20,6 +20,9 @@ export const colors = {
   grey: SKColors.silver.dark,
   text: SKColors.black.base,
   textSecondary: SKColors.grey.dark,
+  mainNavPrimary: "#3D3D3D",
+  mainNavHoverBorderColor: "#ABAC6C",
+  noColor: "transparent",
   ...SKColors,
 };
 

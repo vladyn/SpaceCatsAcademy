@@ -1,17 +1,21 @@
-import { Link } from "@reach/router";
 import React from "react";
 import { useQuery, gql } from "@apollo/client";
 import DOMPurify from "dompurify";
 import { Layout, ContentSection } from "../components";
 import QueryResult from "../components/query-result";
+import PageHeadline from "../components/page-headline";
 
 /* The query */
 
-const ABOUT = gql`
+const HOME = gql`
   query getPage($page: String) {
     getPage(page: $page) {
       title
-      description
+      heading_one
+      heading_two
+      page_content_left_column
+      page_content_right_column
+      page_content_row
     }
   }
 `;
@@ -19,22 +23,26 @@ const ABOUT = gql`
 /** Home page */
 
 const Home = () => {
-  const { data, error, loading } = useQuery(ABOUT, {
+  const { data, error, loading } = useQuery(HOME, {
     variables: {
       page: "home",
     },
   });
 
-  const dirty = data?.getPage?.description;
-  const clean = DOMPurify.sanitize(dirty);
+  const content_row_dirty = data?.getPage?.page_content_row;
+  const page_content_row = DOMPurify.sanitize(content_row_dirty);
 
   return (
     <Layout fullWidth>
       <ContentSection>
         <QueryResult error={error} data={data} loading={loading}>
-          <h2>{data?.getPage?.title}</h2>
-          <div dangerouslySetInnerHTML={{ __html: clean }} />
-          <Link to="/cats">You can check out our Favorites here.</Link>
+          <PageHeadline
+            title={data?.getPage?.heading_one}
+            subTitle={data?.getPage?.heading_two}
+            buttonOne={{ link: "/jobs", label: "See jobs" }}
+            buttonTwo={{ link: "/contact", label: "Contact Us" }}
+          />
+          <div dangerouslySetInnerHTML={{ __html: page_content_row }} />
         </QueryResult>
       </ContentSection>
     </Layout>

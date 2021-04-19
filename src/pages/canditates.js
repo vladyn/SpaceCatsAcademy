@@ -9,7 +9,7 @@ import MarkDown from "../components/md-content";
 
 /* The query */
 
-const ABOUT = gql`
+const CANDIDATES = gql`
   query getPage($page: String) {
     getPage(page: $page) {
       title
@@ -22,12 +22,12 @@ const ABOUT = gql`
   }
 `;
 
-/** About us page */
+/** CandiDates page */
 
-const About = () => {
-  const { data, error, loading } = useQuery(ABOUT, {
+const Candidates = () => {
+  const { data, error, loading } = useQuery(CANDIDATES, {
     variables: {
-      page: "about",
+      page: "candidates",
     },
   });
 
@@ -51,7 +51,6 @@ const About = () => {
           <PageHeadline
             title={data?.getPage?.heading_one}
             subTitle={data?.getPage?.heading_two}
-            buttonTwo={{ link: "asd", label: "Get to know us" }}
           />
           <MarkDown content={page_content_row} />
           <MarkDown content={page_content_left_column} />
@@ -62,4 +61,4 @@ const About = () => {
   );
 };
 
-export default About;
+export default Candidates;

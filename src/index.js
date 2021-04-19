@@ -19,8 +19,6 @@ const client = new ApolloClient({
   cache: new InMemoryCache(),
 });
 
-console.log(process.env.NODE_ENV);
-
 ReactDOM.render(
   <ApolloProvider client={client}>
     <React.StrictMode>
