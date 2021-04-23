@@ -26,52 +26,62 @@ export const colors = {
   ...SKColors,
 };
 
-const GlobalStyles = () => (
-  <Global
-    styles={{
-      [["html", "body"]]: {
-        height: "100%",
-      },
-      body: {
-        margin: 0,
-        padding: 0,
-        fontFamily: "'Lato', sans-serif",
-        backgroundColor: colors.background,
-        color: colors.text,
-      },
-      "#root": {
-        display: "flex",
-        flexDirection: "column",
-        minHeight: "100%",
-        backgroundImage: 'url("/tt_background.webp")',
-        backgroundSize: "cover",
-        backgroundRepeat: "no-repeat",
-      },
-      "*": {
-        boxSizing: "border-box",
-      },
-      [["h1", "h2", "h3", "h4", "h5", "h6"]]: {
-        margin: 0,
-        fontWeight: 600,
-      },
-      h1: {
-        fontSize: 40,
-        lineHeight: 1,
-      },
-      h2: {
-        fontSize: 36,
-      },
-      h3: {
-        fontSize: 30,
-      },
-      h5: {
-        fontSize: 16,
-        textTransform: "uppercase",
-        letterSpacing: 4,
-      },
-    }}
-  />
-);
+export const backGrounds = new Map();
+backGrounds.set(undefined, 'url("/tt_background.webp")');
+backGrounds.set("about", 'url("/about_cover_image.webp")');
+backGrounds.set("business", 'url("/business_cover_image.webp")');
+
+const GlobalStyles = ({ page }) => {
+  // TODO: Remove this.
+  console.log(page);
+  console.log(backGrounds.get(page));
+  return (
+    <Global
+      styles={{
+        [["html", "body"]]: {
+          height: "100%",
+        },
+        body: {
+          margin: 0,
+          padding: 0,
+          fontFamily: "'Lato', sans-serif",
+          backgroundColor: colors.background,
+          color: colors.text,
+        },
+        "#root": {
+          display: "flex",
+          flexDirection: "column",
+          minHeight: "100%",
+          backgroundImage: backGrounds.get(page),
+          backgroundSize: "cover",
+          backgroundRepeat: "no-repeat",
+        },
+        "*": {
+          boxSizing: "border-box",
+        },
+        [["h1", "h2", "h3", "h4", "h5", "h6"]]: {
+          margin: 0,
+          fontWeight: 600,
+        },
+        h1: {
+          fontSize: 40,
+          lineHeight: 1,
+        },
+        h2: {
+          fontSize: 36,
+        },
+        h3: {
+          fontSize: 30,
+        },
+        h5: {
+          fontSize: 16,
+          textTransform: "uppercase",
+          letterSpacing: 4,
+        },
+      }}
+    />
+  );
+};
 
 export default GlobalStyles;
 
