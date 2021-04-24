@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import GlobalStyles from "./styles";
+import { Router } from "@reach/router";
 import Pages from "./pages";
 import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
 import WebFont from "webfontloader";
@@ -22,6 +23,9 @@ const client = new ApolloClient({
 ReactDOM.render(
   <ApolloProvider client={client}>
     <React.StrictMode>
+      <Router>
+        <GlobalStyles path="/:page" />
+      </Router>
       <GlobalStyles />
       <Pages />
     </React.StrictMode>
