@@ -27,14 +27,14 @@ export const colors = {
 };
 
 export const backGrounds = new Map();
-backGrounds.set(undefined, 'url("/tt_background.webp")');
-backGrounds.set("about", 'url("/about_cover_image.webp")');
-backGrounds.set("business", 'url("/business_cover_image.webp")');
+backGrounds.set(undefined, 'url("/cover_image_home.webp")');
+backGrounds.set("about", 'url("/cover_image_about.webp")');
+backGrounds.set("business", 'url("/cover_image_business.webp")');
+backGrounds.set("gitInTouch", 'url("/cover_image_get_in_touch.webp")');
+backGrounds.set("candidates", 'url("/cover_image_candidates.webp")');
 
 const GlobalStyles = ({ page }) => {
-  // TODO: Remove this.
-  console.log(page);
-  console.log(backGrounds.get(page));
+  // TODO: Logic based on the current page and style changes
   return (
     <Global
       styles={{
