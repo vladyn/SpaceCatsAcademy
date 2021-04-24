@@ -17,3 +17,12 @@ export const humanReadableTimeFromSeconds = (seconds) => {
 
   return timeStr;
 };
+
+/**
+ * Switch case. A helper function to replace switch statement
+ * @param {Object | Array} cases - The container of the cases
+ * @return {Function} - the matched case
+ * */
+
+export const switchcase = (cases) => (defaultCase) => (key) =>
+  cases.hasOwnProperty(key) ? cases[key] : defaultCase;

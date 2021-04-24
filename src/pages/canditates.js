@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from "@reach/router";
 import { useQuery, gql } from "@apollo/client";
 import DOMPurify from "dompurify";
 import { Layout, ContentSection } from "../components";

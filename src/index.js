@@ -24,7 +24,7 @@ ReactDOM.render(
   <ApolloProvider client={client}>
     <React.StrictMode>
       <Router>
-        <GlobalStyles path="/:page" />
+        <GlobalStyles path=":page" />
       </Router>
       <GlobalStyles />
       <Pages />
