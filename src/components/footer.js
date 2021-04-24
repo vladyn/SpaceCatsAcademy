@@ -26,10 +26,9 @@ const FooterContainer = styled.div({
   alignItems: "center",
   color: colors.pink.base,
   marginTop: 30,
-  height: 200,
+  height: 120,
   padding: 20,
-  backgroundColor: "transparent",
-  borderTop: `solid 1px ${colors.pink.light}`,
+  backgroundImage: "linear-gradient(to bottom, #ABAC6C, #DAC96D)",
 });
 
 const LogoContainer = styled.div({

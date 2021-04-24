@@ -2,6 +2,7 @@ import React from "react";
 import "@apollo/space-kit/reset.css";
 import { colors as SKColors } from "@apollo/space-kit/colors";
 import { Global } from "@emotion/core";
+import { switchcase } from "./utils/helpers";
 
 const breakpoints = [480, 768, 992, 1200];
 export const mq = breakpoints.map((bp) => `@media (min-width: ${bp}px)`);
@@ -30,11 +31,23 @@ export const backGrounds = new Map();
 backGrounds.set(undefined, 'url("/cover_image_home.webp")');
 backGrounds.set("about", 'url("/cover_image_about.webp")');
 backGrounds.set("business", 'url("/cover_image_business.webp")');
-backGrounds.set("gitInTouch", 'url("/cover_image_get_in_touch.webp")');
+backGrounds.set("contact", 'url("/cover_image_get_in_touch.webp")');
+backGrounds.set("jobs", 'url("/cover_image_jobs.webp")');
 backGrounds.set("candidates", 'url("/cover_image_candidates.webp")');
 
+const backgroundSizeCases = {
+  undefined: "cover",
+  about: "100% 476px",
+  business: "100% 476px",
+  candidates: "100% 300px",
+  jobs: "100% 300px",
+  cats: "100% 300px",
+  contact: "100% 300px",
+};
+
+const positionBkg = (page) => switchcase(backgroundSizeCases)("cover")(page);
+
 const GlobalStyles = ({ page }) => {
-  // TODO: Logic based on the current page and style changes
   return (
     <Global
       styles={{
@@ -46,6 +59,10 @@ const GlobalStyles = ({ page }) => {
           padding: 0,
           fontFamily: "'Lato', sans-serif",
           backgroundColor: colors.background,
+          backgroundImage: 'url("/tt_bkg.svg")',
+          backgroundSize: "contain",
+          backgroundPosition: "center top",
+          backgroundRepeat: "no-repeat",
           color: colors.text,
         },
         "#root": {
@@ -53,7 +70,7 @@ const GlobalStyles = ({ page }) => {
           flexDirection: "column",
           minHeight: "100%",
           backgroundImage: backGrounds.get(page),
-          backgroundSize: "cover",
+          backgroundSize: positionBkg(page),
           backgroundRepeat: "no-repeat",
         },
         "*": {
