@@ -1,6 +1,9 @@
 import React from "react";
 import styled from "@emotion/styled";
-import { colors, ApolloIcon } from "../styles";
+import { colors } from "../styles";
+import logo_Footer_x2 from "../assets/tt_Logo_Footer@2x.png";
+import logo_Footer_x15 from "../assets/tt_Logo_Footer@1.5x.png";
+import logo_Footer from "../assets/tt_Logo_Footer@1.png";
 
 /**
  * Footer is useless component to make our app look a little closer to a real website!
@@ -10,7 +13,12 @@ const Footer = ({ children }) => {
     <FooterContainer>
       2021 ©{" "}
       <LogoContainer>
-        <ApolloIcon width="100px" height="40px" />
+        <LogoFooter
+          width="132px"
+          height="28px"
+          src={logo_Footer}
+          srcSet={`${logo_Footer_x2} 2x, ${logo_Footer_x15} 1.5x`}
+        />
       </LogoContainer>
     </FooterContainer>
   );
@@ -38,3 +46,5 @@ const LogoContainer = styled.div({
     height: 40,
   },
 });
+
+const LogoFooter = styled.img({});
