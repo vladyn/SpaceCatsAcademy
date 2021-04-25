@@ -3,6 +3,8 @@ import { colors, widths } from "../styles";
 import styled from "@emotion/styled";
 import { Link } from "@reach/router";
 import logo from "../assets/tt_Logo.png";
+import logo_x2 from "../assets/tt_Logo@2x.png";
+import logo_x3 from "../assets/tt_Logo@3x.png";
 import MainNavigation from "./main-navigation";
 
 /**
@@ -17,7 +19,7 @@ const Header = ({ children }) => {
           <HomeLink to="/">
             <HomeButton>
               <LogoContainer>
-                <Logo src={logo} />
+                <Logo src={logo} srcSet={`${logo_x2} 2x, ${logo_x3} 3x`} />
                 <Title>
                   <h3>Technology Talents</h3>
                   <div>The career elevation experts for many happy stories</div>
