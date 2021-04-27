@@ -33,7 +33,7 @@ const Home = () => {
   const page_content_row = DOMPurify.sanitize(content_row_dirty);
 
   return (
-    <Layout fullWidth>
+    <Layout fullWidth grid>
       <ContentSection>
         <QueryResult error={error} data={data} loading={loading}>
           <PageHeadline
@@ -41,6 +41,7 @@ const Home = () => {
             subTitle={data?.getPage?.heading_two}
             buttonOne={{ link: "/jobs", label: "See jobs" }}
             buttonTwo={{ link: "/contact", label: "Contact Us" }}
+            fullHeight
           />
           <div dangerouslySetInnerHTML={{ __html: page_content_row }} />
         </QueryResult>
