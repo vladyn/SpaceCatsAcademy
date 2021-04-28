@@ -23,7 +23,6 @@ const ABOUT = gql`
 `;
 
 /** About us page */
-
 const About = () => {
   const { data, error, loading } = useQuery(ABOUT, {
     variables: {
