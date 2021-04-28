@@ -11,7 +11,7 @@ export const unit = 8;
 export const widths = {
   largePageWidth: 1600,
   regularPageWidth: 1100,
-  textPageWitdh: 800,
+  textPageWitdh: 1100,
 };
 export const colors = {
   primary: SKColors.indigo.base,

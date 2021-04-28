@@ -8,31 +8,40 @@ import PropTypes from "prop-types";
 /** Page headline display */
 
 const PageHeadline = (props) => {
-  const { title, subTitle, buttonOne, buttonTwo } = props;
+  const { title, subTitle, buttonOne, buttonTwo, verticallyAligned } = props;
 
   return (
-    <Wrapper>
+    <Wrapper verticallyAligned={verticallyAligned} className="wrapper">
       <h1>{title}</h1>
       <h2>{subTitle}</h2>
-      {buttonOne && (
-        <Button size="large" style={{ backgroundColor: "#F4EC8F" }}>
-          <Link to={buttonOne?.link}>{buttonOne?.label}</Link>
-        </Button>
-      )}
+      <ButtonsWrapper>
+        {buttonOne && (
+          <Button size="large" style={{ backgroundColor: "#F4EC8F" }}>
+            <Link to={buttonOne?.link}>{buttonOne?.label}</Link>
+          </Button>
+        )}
 
-      {buttonTwo && (
-        <Button size="large">
-          <Link to={buttonTwo?.link}>{buttonTwo?.label}</Link>
-        </Button>
-      )}
+        {buttonTwo && (
+          <Button size="large">
+            <Link to={buttonTwo?.link}>{buttonTwo?.label}</Link>
+          </Button>
+        )}
+      </ButtonsWrapper>
     </Wrapper>
   );
 };
 
 export default PageHeadline;
 
-const Wrapper = styled.div({
+const Wrapper = styled.div((props) => ({
   textAlign: "center",
+  display: props.verticallyAligned ? "flex" : "block",
+  flexFlow: "column wrap",
+  paddingBottom: props.verticallyAligned ? "0" : "9em",
+  alignItems: props.verticallyAligned ? "center" : "inherit",
+  alignSelf: "center",
+  justifyContent: props.verticallyAligned ? "center" : "inherit",
+  flex: props.verticallyAligned ? "1" : "auto",
   h1: {
     fontSize: "3em",
     fontWeight: 600,
@@ -61,11 +70,16 @@ const Wrapper = styled.div({
       outline: "none",
     },
   },
+}));
+
+const ButtonsWrapper = styled.div({
+  padding: "10px 0",
 });
 
 PageHeadline.propTypes = {
   title: PropTypes.string,
   subTitle: PropTypes.string,
+  verticallyAligned: PropTypes.bool,
   buttonOne: PropTypes.shape({
     link: PropTypes.string,
     label: PropTypes.string,
