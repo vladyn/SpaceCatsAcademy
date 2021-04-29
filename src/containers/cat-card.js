@@ -9,7 +9,15 @@ import { colors, mq } from "../styles";
  * for each track populating the tracks grid homepage.
  */
 const CatCard = ({ cat }) => {
-  const { entry_id, url_title, photo, title, missions, description } = cat;
+  const {
+    entry_id,
+    url_title,
+    photo,
+    title,
+    missions,
+    work_location: location,
+    seniority,
+  } = cat;
 
   return (
     <CardContainer id={entry_id}>
@@ -19,7 +27,8 @@ const CatCard = ({ cat }) => {
         </CardImageContainer>
         <CardBody>
           <CardTitle>{title || ""}</CardTitle>
-          <p>{description}</p>
+          <CardSubTitle>{location}</CardSubTitle>
+          {seniority && <p>{seniority}</p>}
           {missions.map((mission) => (
             <CardSection
               key={mission.row_id}
@@ -86,6 +95,14 @@ const CardTitle = styled.h3({
   fontSize: "1.4em",
   lineHeight: "1em",
   fontWeight: 700,
+  color: colors.text,
+  flex: 1,
+});
+
+const CardSubTitle = styled.h4({
+  textAlign: "center",
+  fontSize: "1em",
+  lineHeight: "1em",
   color: colors.text,
   flex: 1,
 });

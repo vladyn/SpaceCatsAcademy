@@ -23,6 +23,8 @@ const SPACECATS = gql`
       entry_id
       photo
       description
+      work_location
+      seniority
       missions {
         row_id
         name
