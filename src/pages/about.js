@@ -6,6 +6,8 @@ import PageHeadline from "../components/page-headline";
 import QueryResult from "../components/query-result";
 import MarkDown from "../components/md-content";
 import SplitSection from "../components/split-section";
+import icon_union from "../assets/Icon_Union.svg";
+import icon_check from "../assets/Icon_Check.svg";
 
 /* The query */
 
@@ -53,7 +55,7 @@ const About = () => {
             buttonTwo={{ link: "asd", label: "Get to know us" }}
           />
           <ContentSection>
-            <SplitSection>
+            <SplitSection iconLeft={icon_union} iconRight={icon_check}>
               <MarkDown content={page_content_left_column} />
               <MarkDown content={page_content_right_column} />
             </SplitSection>

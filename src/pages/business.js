@@ -5,6 +5,8 @@ import { Layout, ContentSection } from "../components";
 import PageHeadline from "../components/page-headline";
 import QueryResult from "../components/query-result";
 import MarkDown from "../components/md-content";
+import SplitSection from "../components/split-section";
+import icon_talk from "../assets/Icon_Talk.svg";
 
 /* The query */
 
@@ -52,9 +54,12 @@ const Business = () => {
             subTitle={data?.getPage?.heading_two}
             buttonTwo={{ link: "/contact", label: "Contact Us" }}
           />
-          <MarkDown content={page_content_row} />
-          <MarkDown content={page_content_left_column} />
-          <MarkDown content={page_content_right_column} />
+          <SplitSection iconLeft={icon_talk}>
+            <MarkDown content={page_content_left_column} />
+            <MarkDown content={page_content_right_column} />
+          </SplitSection>
+
+          {page_content_row && <MarkDown content={page_content_row} />}
         </QueryResult>
       </ContentSection>
     </Layout>
