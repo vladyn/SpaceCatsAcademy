@@ -9,8 +9,14 @@ import PropTypes from "prop-types";
  */
 
 const SplitSection = ({ children, iconLeft, iconRight }) => {
+  const spaceOutVertical = iconLeft || iconRight ? "105px" : "0px";
+
   return (
-    <ContentDiv iconLeft={iconLeft} iconRight={iconRight}>
+    <ContentDiv
+      iconLeft={iconLeft}
+      iconRight={iconRight}
+      marginTop={spaceOutVertical}
+    >
       {children}
     </ContentDiv>
   );
@@ -18,25 +24,25 @@ const SplitSection = ({ children, iconLeft, iconRight }) => {
 
 export default SplitSection;
 
-const ContentDiv = styled.div((props) => ({
+const ContentDiv = styled.div(({ iconRight, iconLeft, marginTop }) => ({
   display: "flex",
   flexDirection: "row",
   flexWrap: "wrap",
   width: "100%",
   div: {
-    paddingTop: "105px",
+    paddingTop: marginTop,
     display: "flex",
     flexDirection: "column",
     flexBasis: "100%",
     flex: "1",
     ":first-child": {
-      backgroundImage: `url(${props.iconLeft})`,
+      backgroundImage: `url(${iconLeft})`,
       backgroundPosition: "top left",
       backgroundRepeat: "no-repeat",
       paddingRight: "1em",
     },
     ":last-child": {
-      backgroundImage: `url(${props.iconRight})`,
+      backgroundImage: `url(${iconRight})`,
       backgroundPosition: "top left",
       backgroundRepeat: "no-repeat",
       paddingLeft: "1em",

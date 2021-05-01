@@ -5,6 +5,7 @@ import { Layout, ContentSection } from "../components";
 import PageHeadline from "../components/page-headline";
 import QueryResult from "../components/query-result";
 import MarkDown from "../components/md-content";
+import SplitSection from "../components/split-section";
 
 /* The query */
 
@@ -51,9 +52,12 @@ const Candidates = () => {
             title={data?.getPage?.heading_one}
             subTitle={data?.getPage?.heading_two}
           />
-          <MarkDown content={page_content_row} />
-          <MarkDown content={page_content_left_column} />
-          <MarkDown content={page_content_right_column} />
+          <SplitSection>
+            <MarkDown content={page_content_left_column} />
+            <MarkDown content={page_content_right_column} />
+          </SplitSection>
+
+          {page_content_row && <MarkDown content={page_content_row} />}
         </QueryResult>
       </ContentSection>
     </Layout>
