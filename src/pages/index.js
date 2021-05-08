@@ -1,8 +1,8 @@
 import React, { Fragment } from "react";
 import { Router } from "@reach/router";
 /** importing our pages */
-import Cats from "./cats";
 import GetInTouch from "./cet-in-touch";
+import Jobs from "./jobs";
 import SpaceCat from "./space-cat";
 import About from "./about";
 import Home from "./home";
@@ -17,8 +17,7 @@ export default function Pages() {
       <Business path="/business" />
       <Candidates path="/candidates" />
       <GetInTouch path="/contact" />
-      <Cats path="/jobs" />
-      <Cats path="/cats" />
+      <Jobs path="/jobs" />
       <SpaceCat path="/cat/:name" />
     </Router>
   );
