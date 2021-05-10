@@ -27,6 +27,8 @@ export const colors = {
   cardTypeTwo: "#61A48C",
   cardTypeThree: "#CFBE5F",
   cardTypeFour: "#6E8FCA",
+  cardHoverBgColor: "#f6f6e0",
+  cardHoverBorderColor: "#E1E1B3",
   noColor: "transparent",
   ...SKColors,
 };

@@ -5,7 +5,7 @@ import styled from "@emotion/styled";
 import { colors, mq } from "../styles";
 
 /**
- * Track Card component renders basic info in a card.js format
+ * Track Card component renders basic info in a job-card.js format
  * for each track populating the tracks grid homepage.
  */
 const JobCard = ({ details }) => {
@@ -13,12 +13,17 @@ const JobCard = ({ details }) => {
     entry_id,
     url_title,
     entry_date,
-    photo,
     title,
     missions,
     work_location: location,
-    seniority,
   } = details;
+
+  const humanDate = new Date(entry_date).toLocaleDateString("en-EN", {
+    weekday: "long",
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
 
   return (
     <CardContainer id={entry_id}>
@@ -26,7 +31,6 @@ const JobCard = ({ details }) => {
         <CardBody>
           <CardTitle>{title || ""}</CardTitle>
           <CardSubTitle>{location}</CardSubTitle>
-          {seniority && <p>{seniority}</p>}
           {missions.map((mission) => (
             <CardSection
               key={mission.row_id}
@@ -36,7 +40,7 @@ const JobCard = ({ details }) => {
             />
           ))}
           <CardFooter>
-            <CardDate>{entry_date}</CardDate>
+            <CardDate>{humanDate}</CardDate>
           </CardFooter>
         </CardBody>
       </CardContent>
@@ -48,15 +52,17 @@ export default JobCard;
 
 /** Job Card styled components */
 const CardContainer = styled.div({
-  borderRadius: 6,
+  borderRadius: 5,
   color: colors.text,
   backgroundSize: "cover",
   backgroundColor: "white",
-  boxShadow: "0px 1px 5px 0px rgba(0,0,0,0.15)",
+  boxShadow: "0px 4px 30px 0px rgba(174,174,129,0.3)",
   backgroundPosition: "center",
   display: "flex",
   flexDirection: "column",
-  justifyContent: "space-between",
+  justifyContent: "start",
+  transition:
+    "background-color 0.1s, border-color 0.2ms, border-width 0.2s, box-shadow 0.7s",
   [mq[0]]: {
     width: "90%",
   },
@@ -70,8 +76,13 @@ const CardContainer = styled.div({
   margin: 10,
   overflow: "hidden",
   position: "relative",
+  padding: 18,
   ":hover": {
-    backgroundColor: colors.pink.lightest,
+    backgroundColor: colors.cardHoverBgColor,
+    border: `5px solid ${colors.cardHoverBorderColor}`,
+    boxShadow: "0px 4px 20px 0px rgba(174,174,129,0.7)",
+    color: colors.grey.darker,
+    padding: 13,
   },
   cursor: "pointer",
 });
@@ -79,7 +90,7 @@ const CardContainer = styled.div({
 const CardContent = styled.div({
   display: "flex",
   flexDirection: "column",
-  justifyContent: "space-around",
+  justifyContent: "start",
   height: "100%",
 });
 
@@ -89,7 +100,7 @@ const CardTitle = styled.h3({
   lineHeight: "1em",
   fontWeight: 700,
   color: colors.text,
-  flex: 1,
+  flex: "0 1 auto",
 });
 
 const CardSubTitle = styled.h4({
@@ -97,32 +108,10 @@ const CardSubTitle = styled.h4({
   fontSize: "1em",
   lineHeight: "1em",
   color: colors.text,
-  flex: 1,
-});
-
-const CardImageContainer = styled.div({
-  height: 220,
-  position: "relative",
-  "::after": {
-    content: '""',
-    position: "absolute",
-    top: 0,
-    bottom: 0,
-    left: 0,
-    right: 0,
-    background: "rgba(250,0,150,0.20)",
-  },
-});
-
-const CardImage = styled.img({
-  objectFit: "cover",
-  width: "100%",
-  height: "100%",
-  filter: "grayscale(60%)",
+  flex: "0 1 auto",
 });
 
 const CardBody = styled.div({
-  padding: 18,
   flex: 1,
   display: "flex",
   color: colors.textSecondary,
@@ -135,4 +124,6 @@ const CardFooter = styled.div({
   flexDirection: "Row",
 });
 
-const CardDate = styled.time({});
+const CardDate = styled.time({
+  marginTop: "auto",
+});
