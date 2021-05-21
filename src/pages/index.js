@@ -18,7 +18,7 @@ export default function Pages() {
       <Candidates path="/candidates" />
       <GetInTouch path="/contact" />
       <Jobs path="/jobs" />
-      <SpaceCat path="/cat/:name" />
+      <SpaceCat path="/jobs/:name" />
     </Router>
   );
 }

@@ -1,17 +1,14 @@
 import React from "react";
 import styled from "@emotion/styled";
 import { Link } from "@reach/router";
-/** TODO: Remove them OR use them */
 import {
   colors,
-  IconArrowRight,
-  Button,
-  IconDoubleArrowRight,
-  IconRun,
-  IconBook,
+  // IconArrowRight,
+  // Button,
+  // IconDoubleArrowRight,
+  // IconRun,
+  // IconBook,
 } from "../styles";
-/** TODO: Remove them OR use them */
-import PropTypes from "prop-types";
 
 /**
  * Main navigation.
@@ -46,8 +43,6 @@ const MainNavigation = (props) => {
 };
 
 export default MainNavigation;
-
-MainNavigation.propTypes = {};
 
 /** Main navigation styles components */
 const NavWrapper = styled.nav({

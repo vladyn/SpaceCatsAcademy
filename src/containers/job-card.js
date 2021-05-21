@@ -1,5 +1,5 @@
 import { CardSection } from "@apollo/space-kit/Card";
-import { Link } from "@reach/router";
+import { useNavigate } from "@reach/router";
 import React from "react";
 import styled from "@emotion/styled";
 import { colors, mq } from "../styles";
@@ -18,6 +18,9 @@ const JobCard = ({ details }) => {
     work_location: location,
   } = details;
 
+  const navigate = useNavigate();
+  const getJob = () => navigate(`/jobs/${url_title}`);
+
   const humanDate = new Date(entry_date).toLocaleDateString("en-EN", {
     weekday: "long",
     year: "numeric",
@@ -26,7 +29,7 @@ const JobCard = ({ details }) => {
   });
 
   return (
-    <CardContainer id={entry_id}>
+    <CardContainer id={entry_id} onClick={getJob}>
       <CardContent>
         <CardBody>
           <CardTitle>{title || ""}</CardTitle>
