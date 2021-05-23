@@ -23,6 +23,12 @@ export const colors = {
   textSecondary: SKColors.grey.dark,
   mainNavPrimary: "#3D3D3D",
   mainNavHoverBorderColor: "#ABAC6C",
+  cardTypeOne: "#ABAC6C",
+  cardTypeTwo: "#61A48C",
+  cardTypeThree: "#CFBE5F",
+  cardTypeFour: "#6E8FCA",
+  cardHoverBgColor: "#f6f6e0",
+  cardHoverBorderColor: "#E1E1B3",
   noColor: "transparent",
   ...SKColors,
 };

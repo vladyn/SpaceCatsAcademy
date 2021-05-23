@@ -28,7 +28,7 @@ const Footer = () => {
         </div>
       </LogoContainer>
       <div>
-        <a href="/privacy">Privacy Policy</a>
+        <a href="/">Privacy Policy</a>
         <a href="https://www.linkedin.com/company/technologytalents/">
           <img src={logo_LinkedIn} alt="Follow us on LinkedIn" rel="external" />
         </a>
@@ -60,7 +60,7 @@ const FooterContainer = styled.div({
   },
   a: {
     color: colors.white,
-    ":first-child": {
+    ":first-of-type": {
       marginRight: 12,
     },
   },
