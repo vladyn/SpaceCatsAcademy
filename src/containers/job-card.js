@@ -34,14 +34,18 @@ const JobCard = ({ details }) => {
         <CardBody>
           <CardTitle>{title || ""}</CardTitle>
           <CardSubTitle>{location}</CardSubTitle>
-          {missions.map((mission) => (
-            <CardSection
-              key={mission.row_id}
-              heading={mission.name}
-              description={mission.description}
-              actions={() => {}}
-            />
-          ))}
+          {missions.map((mission, index) => {
+            if (index > 2) {
+              return null;
+            }
+            return (
+              <CardSection
+                key={mission.row_id}
+                heading={mission.name}
+                description={mission.description}
+              />
+            );
+          })}
           <CardFooter>
             <CardDate>{humanDate}</CardDate>
           </CardFooter>
@@ -98,7 +102,6 @@ const CardContent = styled.div({
 });
 
 const CardTitle = styled.h3({
-  textAlign: "center",
   fontSize: "1.4em",
   lineHeight: "1em",
   fontWeight: 700,
@@ -107,7 +110,6 @@ const CardTitle = styled.h3({
 });
 
 const CardSubTitle = styled.h4({
-  textAlign: "center",
   fontSize: "1em",
   lineHeight: "1em",
   color: colors.text,
@@ -119,7 +121,10 @@ const CardBody = styled.div({
   display: "flex",
   color: colors.textSecondary,
   flexDirection: "column",
-  justifyContent: "space-around",
+  justifyContent: "space-between",
+  section: {
+    marginTop: 12,
+  },
 });
 
 const CardFooter = styled.div({

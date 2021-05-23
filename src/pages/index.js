@@ -2,8 +2,8 @@ import React, { Fragment } from "react";
 import { Router } from "@reach/router";
 /** importing our pages */
 import GetInTouch from "./cet-in-touch";
+import JobPosition from "./job-position";
 import Jobs from "./jobs";
-import SpaceCat from "./space-cat";
 import About from "./about";
 import Home from "./home";
 import Business from "./business";
@@ -18,7 +18,7 @@ export default function Pages() {
       <Candidates path="/candidates" />
       <GetInTouch path="/contact" />
       <Jobs path="/jobs" />
-      <SpaceCat path="/jobs/:name" />
+      <JobPosition path="/jobs/:name" />
     </Router>
   );
 }

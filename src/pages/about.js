@@ -52,7 +52,7 @@ const About = () => {
           <PageHeadline
             title={data?.getPage?.heading_one}
             subTitle={data?.getPage?.heading_two}
-            buttonTwo={{ link: "asd", label: "Get to know us" }}
+            buttonTwo={{ link: "/candidates", label: "Get to know us" }}
           />
           <ContentSection>
             <SplitSection iconLeft={icon_union} iconRight={icon_check}>

@@ -25,8 +25,9 @@ ReactDOM.render(
     <React.StrictMode>
       <Router>
         <GlobalStyles path=":page" />
+        <GlobalStyles path="/jobs/:page" />
+        <GlobalStyles path="/" />
       </Router>
-      <GlobalStyles />
       <Pages />
     </React.StrictMode>
   </ApolloProvider>,

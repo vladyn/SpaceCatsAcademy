@@ -57,7 +57,11 @@ const Candidates = () => {
             <MarkDown content={page_content_right_column} />
           </SplitSection>
 
-          {page_content_row && <MarkDown content={page_content_row} />}
+          <SplitSection
+            buttonOne={{ link: "/jobs", label: "See jobs" }}
+            buttonTwo={{ link: "/contact", label: "Contact Us" }}
+          />
+          <MarkDown content={page_content_row} />
         </QueryResult>
       </ContentSection>
     </Layout>
