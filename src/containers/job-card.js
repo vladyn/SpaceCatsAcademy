@@ -8,7 +8,7 @@ import { colors, mq } from "../styles";
  * Track Card component renders basic info in a job-card.js format
  * for each track populating the tracks grid homepage.
  */
-const JobCard = ({ details }) => {
+const JobCard = ({ details, color }) => {
   const {
     entry_id,
     url_title,
@@ -22,7 +22,6 @@ const JobCard = ({ details }) => {
   const getJob = () => navigate(`/jobs/${url_title}`);
 
   const humanDate = new Date(entry_date).toLocaleDateString("en-EN", {
-    weekday: "long",
     year: "numeric",
     month: "long",
     day: "numeric",
@@ -32,7 +31,7 @@ const JobCard = ({ details }) => {
     <CardContainer id={entry_id} onClick={getJob}>
       <CardContent>
         <CardBody>
-          <CardTitle>{title || ""}</CardTitle>
+          <CardTitle cardType={color}>{title || ""}</CardTitle>
           <CardSubTitle>{location}</CardSubTitle>
           {missions.map((mission, index) => {
             if (index > 2) {
@@ -47,7 +46,7 @@ const JobCard = ({ details }) => {
             );
           })}
           <CardFooter>
-            <CardDate>{humanDate}</CardDate>
+            <CardDate cardType={color}>{humanDate}</CardDate>
           </CardFooter>
         </CardBody>
       </CardContent>
@@ -101,13 +100,13 @@ const CardContent = styled.div({
   height: "100%",
 });
 
-const CardTitle = styled.h3({
+const CardTitle = styled.h3((props) => ({
   fontSize: "1.4em",
   lineHeight: "1em",
   fontWeight: 700,
-  color: colors.text,
+  color: colors[props.cardType],
   flex: "0 1 auto",
-});
+}));
 
 const CardSubTitle = styled.h4({
   fontSize: "1em",
@@ -132,6 +131,10 @@ const CardFooter = styled.div({
   flexDirection: "Row",
 });
 
-const CardDate = styled.time({
+const CardDate = styled.time((props) => ({
   marginTop: "auto",
-});
+  textTransform: "uppercase",
+  borderTop: `1px solid ${colors[props.cardType]}`,
+  paddingTop: 4,
+  color: colors[props.cardType],
+}));

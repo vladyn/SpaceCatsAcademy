@@ -3,6 +3,7 @@ import { Layout } from "../components";
 import { useQuery, gql } from "@apollo/client";
 import JobCard from "../containers/job-card";
 import QueryResult from "../components/query-result";
+import { randomIndex } from "../utils/helpers";
 
 /**
  * Jobs page
@@ -34,13 +35,24 @@ const JOBS = gql`
   }
 `;
 
+const cardColors = [
+  "cardTypeOne",
+  "cardTypeTwo",
+  "cardTypeThree",
+  "cardTypeFour",
+];
+
 const Jobs = () => {
   const { loading, error, data } = useQuery(JOBS);
   return (
     <Layout grid>
       <QueryResult error={error} data={data} loading={loading}>
         {data?.spaceCats?.map((job) => (
-          <JobCard key={job.entry_id} details={job} />
+          <JobCard
+            key={job.entry_id}
+            details={job}
+            color={randomIndex(cardColors)}
+          />
         ))}
       </QueryResult>
     </Layout>
