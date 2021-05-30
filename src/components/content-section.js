@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "@emotion/styled";
-import { widths, colors } from "../styles";
+import { widths, colors, mq } from "../styles";
 
 /**
  * Content Section component renders content (mainly text/mdown based)
@@ -16,8 +16,20 @@ const ContentDiv = styled.div({
   marginTop: 10,
   display: "flex",
   flexDirection: "column",
-  maxWidth: widths.textPageWitdh,
+  maxWidth: widths.textPageWidth,
   width: "100%",
   alignSelf: "center",
   backgroundColor: colors.noColor,
+  [mq[0]]: {
+    width: "90%",
+  },
+  [mq[1]]: {
+    width: "98%",
+  },
+  [mq[2]]: {
+    width: "96%",
+  },
+  [mq[3]]: {
+    width: "99%",
+  },
 });

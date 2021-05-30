@@ -17,12 +17,13 @@ const SplitSection = ({
   iconRight,
   buttonOne,
   buttonTwo,
+  direction,
 }) => {
   const navigate = useNavigate();
   const jumpTo = (page) => navigate(page);
 
   return (
-    <ContentDiv iconLeft={iconLeft} iconRight={iconRight}>
+    <ContentDiv iconLeft={iconLeft} iconRight={iconRight} direction={direction}>
       {children}
 
       {buttonOne && (
@@ -48,7 +49,7 @@ export default SplitSection;
 
 const ContentDiv = styled.div((props) => ({
   display: "flex",
-  flexDirection: "row",
+  flexDirection: props.direction === "reverse" ? "row-reverse" : "row",
   flexWrap: "wrap",
   width: "100%",
   "> div": {
@@ -70,6 +71,14 @@ const ContentDiv = styled.div((props) => ({
       paddingLeft: "1em",
     },
   },
+  aside: {
+    flexGrow: 0,
+    flexShrink: 4,
+  },
+  section: {
+    flexGrow: 5,
+    flexShrink: 4,
+  },
   ...buttonSection(),
 }));
 
@@ -78,4 +87,5 @@ SplitSection.propTypes = {
   iconRight: PropTypes.string,
   buttonOne: PropTypes.object,
   buttonTwo: PropTypes.object,
+  direction: PropTypes.string,
 };

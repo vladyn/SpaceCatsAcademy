@@ -5,6 +5,18 @@ import { Layout, ContentSection } from "../components";
 import PageHeadline from "../components/page-headline";
 import QueryResult from "../components/query-result";
 import MarkDown from "../components/md-content";
+import SplitSection from "../components/split-section";
+import styled from "@emotion/styled";
+// import the assets
+import tt_logo_b from "../assets/tt_Logo_B.png";
+import tt_logo_b_2x from "../assets/tt_Logo_B@2x.png";
+import tt_logo_b_3x from "../assets/tt_Logo_B@3x.png";
+import icon_letter from "../assets/Icon_letter.svg";
+import icon_location from "../assets/Icon_location.svg";
+import icon_phone from "../assets/Icon_phone.svg";
+import contact1x from "../assets/contact@technologytalents.png";
+import contact2x from "../assets/contact@technologytalents@2x.png";
+import contact3x from "../assets/contact@technologytalents@3x.png";
 
 /* The query */
 
@@ -51,9 +63,37 @@ const GetInTouch = () => {
             title={data?.getPage?.heading_one}
             subTitle={data?.getPage?.heading_two}
           />
-          <MarkDown content={page_content_row} />
-          <MarkDown content={page_content_left_column} />
-          <MarkDown content={page_content_right_column} />
+          <SplitSection direction="reverse">
+            <aside>
+              <LogoBW
+                width="190px"
+                height="41px"
+                src={tt_logo_b}
+                srcSet={`${tt_logo_b_2x} 2x, ${tt_logo_b_3x} 3x`}
+              />
+              <div>
+                <Icon src={icon_letter} alt="Contact us" />
+                <ContactTT
+                  src={contact1x}
+                  srcSet={`${contact2x} 2x, ${contact3x} 3x`}
+                />
+              </div>
+              <div>
+                <Icon src={icon_location} alt="Find us" />
+                <p>1505 Sofia 48 Kademlia Str., floor 1</p>
+              </div>
+
+              <div>
+                <Icon src={icon_phone} alt="Call us" />
+                <p>+359 87 888 9905</p>
+              </div>
+              <MarkDown content={page_content_right_column} />
+            </aside>
+            <section>
+              <MarkDown content={page_content_row} />
+              <MarkDown content={page_content_left_column} />
+            </section>
+          </SplitSection>
         </QueryResult>
       </ContentSection>
     </Layout>
@@ -61,3 +101,20 @@ const GetInTouch = () => {
 };
 
 export default GetInTouch;
+
+const LogoBW = styled.img({
+  width: 190,
+  height: 41,
+});
+
+const Icon = styled("img")`
+  display: block;
+  margin: 1em auto;
+`;
+
+const ContactTT = styled("img")`
+  display: block;
+  margin: 10px auto;
+  width: 304px;
+  height: 49px;
+`;
