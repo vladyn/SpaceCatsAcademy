@@ -1,11 +1,15 @@
+import { Button } from "@apollo/space-kit/Button";
+import { useNavigate } from "@reach/router";
 import React from "react";
 import { useQuery, gql } from "@apollo/client";
 import DOMPurify from "dompurify";
+import styled from "@emotion/styled";
 import { Layout, ContentSection } from "../components";
 import PageHeadline from "../components/page-headline";
 import QueryResult from "../components/query-result";
 import MarkDown from "../components/md-content";
 import SplitSection from "../components/split-section";
+import { buttonSection } from "../styles";
 
 /* The query */
 
@@ -43,6 +47,8 @@ const Candidates = () => {
   const page_content_right_column = DOMPurify.sanitize(
     page_content_right_column_dirty
   );
+  const navigate = useNavigate();
+  const jumpTo = (page) => navigate(page);
 
   return (
     <Layout fullWidth>
@@ -53,14 +59,23 @@ const Candidates = () => {
             subTitle={data?.getPage?.heading_two}
           />
           <SplitSection>
-            <MarkDown content={page_content_left_column} />
-            <MarkDown content={page_content_right_column} />
+            <div>
+              <MarkDown content={page_content_left_column} />
+              <ButtonWrapperTwo>
+                <Button size="large" onClick={() => jumpTo("/contact")}>
+                  Contact Us
+                </Button>
+              </ButtonWrapperTwo>
+            </div>
+            <div>
+              <MarkDown content={page_content_right_column} />
+              <ButtonWrapperOne>
+                <Button size="large" onClick={() => jumpTo("/jobs")}>
+                  See Jobs
+                </Button>
+              </ButtonWrapperOne>
+            </div>
           </SplitSection>
-
-          <SplitSection
-            buttonOne={{ link: "/jobs", label: "See jobs" }}
-            buttonTwo={{ link: "/contact", label: "Contact Us" }}
-          />
           <MarkDown content={page_content_row} />
         </QueryResult>
       </ContentSection>
@@ -69,3 +84,13 @@ const Candidates = () => {
 };
 
 export default Candidates;
+
+const ButtonWrapperOne = styled.div({
+  marginTop: 20,
+  ...buttonSection("cardTypeTwo"),
+});
+
+const ButtonWrapperTwo = styled.div({
+  marginTop: 20,
+  ...buttonSection("cardTypeOne"),
+});

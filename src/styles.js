@@ -27,6 +27,7 @@ export const colors = {
   cardTypeTwo: "#61A48C",
   cardTypeThree: "#CFBE5F",
   cardTypeFour: "#6E8FCA",
+  outlineOne: "#D6BC37",
   cardHoverBgColor: "#f6f6e0",
   cardHoverBorderColor: "#E1E1B3",
   noColor: "transparent",
@@ -101,10 +102,63 @@ const GlobalStyles = ({ page }) => {
           textTransform: "uppercase",
           letterSpacing: 4,
         },
+        button: {
+          textDecoration: "none",
+          color: "#1F1F1F",
+          textTransform: "uppercase",
+          fontFamily: '"Lato Light 300", sans-serif',
+          fontWeight: "400",
+          fontSize: ".85em",
+        },
       }}
     />
   );
 };
+
+export const buttonHeadline = {
+  button: {
+    borderRadius: 26,
+    minWidth: 200,
+    margin: 28,
+    textDecoration: "none",
+    color: "#1F1F1F",
+    textTransform: "uppercase",
+    fontFamily: '"Lato Light 300", sans-serif',
+    fontWeight: "400",
+    fontSize: ".85em",
+    boxShadow: "none",
+    ":last-child": {
+      backgroundColor: colors.noColor,
+      border: `5px solid ${colors.white}`,
+      outline: "none",
+    },
+  },
+};
+
+export const buttonSection = (type = "default") => ({
+  button: {
+    borderRadius: 30,
+    borderWidth: 4,
+    borderStyle: "solid",
+    borderColor: colors[type],
+    boxShadow: "none",
+    minWidth: 200,
+    width: "min-content",
+    padding: "0 20px",
+    textDecoration: "none",
+    letterSpacing: 1,
+    color: "#1F1F1F",
+    textTransform: "uppercase",
+    fontFamily: '"Lato Regular 400", sans-serif',
+    fontSize: ".85em",
+    backgroundColor: colors.white,
+    ":hover": {
+      backgroundColor: colors.white,
+      color: colors[type],
+      outline: "none",
+    },
+  },
+});
 
 export default GlobalStyles;
 

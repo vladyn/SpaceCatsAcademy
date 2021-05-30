@@ -26,3 +26,11 @@ export const humanReadableTimeFromSeconds = (seconds) => {
 
 export const switchcase = (cases) => (defaultCase) => (key) =>
   cases.hasOwnProperty(key) ? cases[key] : defaultCase;
+
+/**
+ * Random index from an Array. Helper function.
+ * @param array
+ * @return {String|Object|Number|Map} Random Array Item
+ */
+export const randomIndex = (array) =>
+  array[Math.floor(Math.random() * array.length)];
