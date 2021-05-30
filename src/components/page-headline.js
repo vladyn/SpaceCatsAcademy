@@ -1,6 +1,6 @@
 import React from "react";
-import { Link } from "@reach/router";
-import { colors } from "../styles";
+import { useNavigate } from "@reach/router";
+import { buttonHeadline } from "../styles";
 import { Button } from "@apollo/space-kit/Button";
 import styled from "@emotion/styled";
 import PropTypes from "prop-types";
@@ -9,6 +9,8 @@ import PropTypes from "prop-types";
 
 const PageHeadline = (props) => {
   const { title, subTitle, buttonOne, buttonTwo, verticallyAligned } = props;
+  const navigate = useNavigate();
+  const jumpTo = (page) => navigate(page);
 
   return (
     <Wrapper verticallyAligned={verticallyAligned} className="wrapper">
@@ -16,14 +18,19 @@ const PageHeadline = (props) => {
       <h2>{subTitle}</h2>
       <ButtonsWrapper>
         {buttonOne && (
-          <Button size="large" style={{ backgroundColor: "#F4EC8F" }}>
-            <Link to={buttonOne?.link}>{buttonOne?.label}</Link>
+          <Button
+            size="large"
+            style={{ backgroundColor: "#F4EC8F" }}
+            title={buttonOne?.label}
+            onClick={() => jumpTo(buttonOne?.link)}
+          >
+            {buttonOne?.label}
           </Button>
         )}
 
         {buttonTwo && (
-          <Button size="large">
-            <Link to={buttonTwo?.link}>{buttonTwo?.label}</Link>
+          <Button size="large" onClick={() => jumpTo(buttonTwo?.link)}>
+            {buttonTwo?.label}
           </Button>
         )}
       </ButtonsWrapper>
@@ -52,24 +59,7 @@ const Wrapper = styled.div((props) => ({
     fontStyle: "italic",
     marginBottom: 20,
   },
-  button: {
-    borderRadius: 26,
-    minWidth: 200,
-    margin: 28,
-    a: {
-      textDecoration: "none",
-      color: "#1F1F1F",
-      textTransform: "uppercase",
-      fontFamily: '"Lato Light 300", sans-serif',
-      fontWeight: "400",
-      fontSize: ".85em",
-    },
-    ":last-child": {
-      backgroundColor: colors.noColor,
-      border: `5px solid ${colors.white}`,
-      outline: "none",
-    },
-  },
+  ...buttonHeadline,
 }));
 
 const ButtonsWrapper = styled.div({

@@ -1,7 +1,8 @@
 import { Button } from "@apollo/space-kit/Button";
-import { Link } from "@reach/router";
+import { useNavigate } from "@reach/router";
 import React from "react";
 import styled from "@emotion/styled";
+import { buttonSection } from "../styles";
 
 // import { widths, colors } from "../styles";
 import PropTypes from "prop-types";
@@ -17,19 +18,26 @@ const SplitSection = ({
   buttonOne,
   buttonTwo,
 }) => {
+  const navigate = useNavigate();
+  const jumpTo = (page) => navigate(page);
+
   return (
     <ContentDiv iconLeft={iconLeft} iconRight={iconRight}>
       {children}
 
       {buttonOne && (
-        <Button size="large" style={{ backgroundColor: "#F4EC8F" }}>
-          <Link to={buttonOne?.link}>{buttonOne?.label}</Link>
+        <Button size="large" onClick={() => jumpTo(buttonOne?.link)}>
+          {buttonOne?.label}
         </Button>
       )}
 
       {buttonTwo && (
-        <Button size="large">
-          <Link to={buttonTwo?.link}>{buttonTwo?.label}</Link>
+        <Button
+          size="large"
+          title={buttonTwo?.label}
+          onClick={() => jumpTo(buttonTwo?.link)}
+        >
+          {buttonTwo?.label}
         </Button>
       )}
     </ContentDiv>
@@ -43,7 +51,7 @@ const ContentDiv = styled.div((props) => ({
   flexDirection: "row",
   flexWrap: "wrap",
   width: "100%",
-  div: {
+  "> div": {
     paddingTop: `${props.iconLeft || props.iconRight ? "105px" : "20px"}`,
     display: "flex",
     flexDirection: "column",
@@ -62,6 +70,7 @@ const ContentDiv = styled.div((props) => ({
       paddingLeft: "1em",
     },
   },
+  ...buttonSection(),
 }));
 
 SplitSection.propTypes = {
