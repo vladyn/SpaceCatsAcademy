@@ -1,11 +1,13 @@
 import React from "react";
 import { useQuery, gql } from "@apollo/client";
+import { useForm } from "react-hook-form";
 import DOMPurify from "dompurify";
 import { Layout, ContentSection } from "../components";
 import PageHeadline from "../components/page-headline";
 import QueryResult from "../components/query-result";
 import MarkDown from "../components/md-content";
 import SplitSection from "../components/split-section";
+
 import styled from "@emotion/styled";
 // import the assets
 import tt_logo_b from "../assets/tt_Logo_B.png";
@@ -33,6 +35,20 @@ const CONTACT = gql`
   }
 `;
 
+const JOBS = gql`
+  query catDetails {
+    spaceCats {
+      expiration_date
+      title
+      url_title
+      entry_id
+      description
+      work_location
+      seniority
+    }
+  }
+`;
+
 /** Get in Touch / Contact page */
 
 const GetInTouch = () => {
@@ -41,6 +57,9 @@ const GetInTouch = () => {
       page: "contact",
     },
   });
+  const {
+    data: { spaceCats },
+  } = useQuery(JOBS);
 
   const page_content_row_dirty = data?.getPage?.page_content_row;
   const page_content_row = DOMPurify.sanitize(page_content_row_dirty);
@@ -54,6 +73,15 @@ const GetInTouch = () => {
   const page_content_right_column = DOMPurify.sanitize(
     page_content_right_column_dirty
   );
+
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm();
+  const onSubmit = (data) => console.log(data);
+  console.log(watch("example")); // watch input value by passing the name of it
 
   return (
     <Layout fullWidth>
@@ -92,6 +120,35 @@ const GetInTouch = () => {
             <section>
               <MarkDown content={page_content_row} />
               <MarkDown content={page_content_left_column} />
+
+              {/* "handleSubmit" will validate your inputs before invoking
+              "onSubmit" */}
+              <form onSubmit={handleSubmit(onSubmit)}>
+                {/* register your input into the hook by invoking the "register" function */}
+                <input defaultValue="Your name" {...register("name")} />
+
+                {/* include validation with required or other standard HTML validation rules */}
+                <input
+                  type="email"
+                  {...register("email", { required: true })}
+                />
+                {/* errors will return when field validation fails  */}
+                {errors.exampleRequired && <span>This field is required</span>}
+
+                <select name="jobs" id="jobs">
+                  {spaceCats.map((data) => (
+                    <option
+                      value={data.url_title}
+                      label={data.title}
+                      key={data.entry_id}
+                    >
+                      data?.title
+                    </option>
+                  ))}
+                </select>
+
+                <input type="submit" />
+              </form>
             </section>
           </SplitSection>
         </QueryResult>
