@@ -105,6 +105,8 @@ export default GetInTouch;
 const LogoBW = styled.img({
   width: 190,
   height: 41,
+  display: "block",
+  margin: "1em auto 3em 3.5em",
 });
 
 const Icon = styled("img")`
