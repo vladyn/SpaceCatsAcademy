@@ -86,9 +86,11 @@ const Candidates = () => {
 export default Candidates;
 
 const ButtonWrapperOne = styled.div({
+  marginTop: 20,
   ...buttonSection("cardTypeTwo"),
 });
 
 const ButtonWrapperTwo = styled.div({
+  marginTop: 20,
   ...buttonSection("cardTypeOne"),
 });
