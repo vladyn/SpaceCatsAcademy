@@ -1,7 +1,7 @@
-import { Button } from "@apollo/space-kit/Button";
 import { useNavigate } from "@reach/router";
 import React from "react";
 import styled from "@emotion/styled";
+import { Button } from "@apollo/space-kit/Button";
 import { buttonSection } from "../styles";
 
 // import { widths, colors } from "../styles";
@@ -50,6 +50,9 @@ export default SplitSection;
 const ContentDiv = styled.div((props) => ({
   display: "flex",
   flexDirection: props.direction === "reverse" ? "row-reverse" : "row",
+  "@media (max-width: 799px)": {
+    flexDirection: "column-reverse",
+  },
   flexWrap: "wrap",
   width: "100%",
   "> div": {
@@ -74,10 +77,13 @@ const ContentDiv = styled.div((props) => ({
   aside: {
     flexGrow: 0,
     flexShrink: 4,
+    flexBasis: "40%",
+    textAlign: "center",
   },
   section: {
     flexGrow: 5,
     flexShrink: 4,
+    flexBasis: "60%",
   },
   ...buttonSection(),
 }));

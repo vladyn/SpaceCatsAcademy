@@ -13,12 +13,17 @@ import styled from "@emotion/styled";
 import tt_logo_b from "../assets/tt_Logo_B.png";
 import tt_logo_b_2x from "../assets/tt_Logo_B@2x.png";
 import tt_logo_b_3x from "../assets/tt_Logo_B@3x.png";
+import social_linkedIn from "../assets/logo_LinkedIn.png";
+import social_fb from "../assets/Logo_FB.png";
 import icon_letter from "../assets/Icon_letter.svg";
 import icon_location from "../assets/Icon_location.svg";
-import icon_phone from "../assets/Icon_phone.svg";
+// import icon_phone from "../assets/Icon_phone.svg";
 import contact1x from "../assets/contact@technologytalents.png";
 import contact2x from "../assets/contact@technologytalents@2x.png";
 import contact3x from "../assets/contact@technologytalents@3x.png";
+
+// Project specific styles
+import { colors } from "../styles";
 
 /* The query */
 
@@ -38,7 +43,6 @@ const CONTACT = gql`
 const JOBS = gql`
   query catDetails {
     spaceCats {
-      expiration_date
       title
       url_title
       entry_id
@@ -52,14 +56,15 @@ const JOBS = gql`
 /** Get in Touch / Contact page */
 
 const GetInTouch = () => {
+  const { data: jobsData, error: jobsError, loading: jobsLoading } = useQuery(
+    JOBS
+  );
+
   const { data, error, loading } = useQuery(CONTACT, {
     variables: {
       page: "contact",
     },
   });
-  const {
-    data: { spaceCats },
-  } = useQuery(JOBS);
 
   const page_content_row_dirty = data?.getPage?.page_content_row;
   const page_content_row = DOMPurify.sanitize(page_content_row_dirty);
@@ -77,11 +82,9 @@ const GetInTouch = () => {
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors },
   } = useForm();
   const onSubmit = (data) => console.log(data);
-  console.log(watch("example")); // watch input value by passing the name of it
 
   return (
     <Layout fullWidth>
@@ -108,12 +111,22 @@ const GetInTouch = () => {
               </div>
               <div>
                 <Icon src={icon_location} alt="Find us" />
-                <p>1505 Sofia 48 Kademlia Str., floor 1</p>
+                <p>Address: Sofia 1734, 8B, Prof. Stefan Dimitrov str.</p>
               </div>
 
+              {/*<div>*/}
+              {/*  <Icon src={icon_phone} alt="Call us" />*/}
+              {/*</div>*/}
+
               <div>
-                <Icon src={icon_phone} alt="Call us" />
-                <p>+359 87 888 9905</p>
+                <a href="https://www.linkedin.com/company/technologytalents/">
+                  <SocialIn src={social_linkedIn} alt="Follow us on LinkedIn" />
+                </a>
+              </div>
+              <div>
+                <a href="https://www.facebook.com/technologytalents/">
+                  <SocialFb src={social_fb} alt="Follow us on Facebook" />
+                </a>
               </div>
               <MarkDown content={page_content_right_column} />
             </aside>
@@ -122,33 +135,80 @@ const GetInTouch = () => {
               <MarkDown content={page_content_left_column} />
 
               {/* "handleSubmit" will validate your inputs before invoking
-              "onSubmit" */}
-              <form onSubmit={handleSubmit(onSubmit)}>
-                {/* register your input into the hook by invoking the "register" function */}
-                <input defaultValue="Your name" {...register("name")} />
+               "onSubmit" */}
+              <FormWrapper>
+                <form onSubmit={handleSubmit(onSubmit)}>
+                  {/* register your input into the hook by invoking the "register" function */}
+                  <input
+                    type="text"
+                    defaultValue="Your name"
+                    {...register("name")}
+                  />
 
-                {/* include validation with required or other standard HTML validation rules */}
-                <input
-                  type="email"
-                  {...register("email", { required: true })}
-                />
-                {/* errors will return when field validation fails  */}
-                {errors.exampleRequired && <span>This field is required</span>}
+                  {/* include validation with required or other standard HTML validation rules */}
+                  <input
+                    type="email"
+                    defaultValue="Your E-mail"
+                    {...register("email", { required: true })}
+                  />
+                  {/* errors will return when field validation fails  */}
+                  {errors.exampleRequired && (
+                    <span>This field is required</span>
+                  )}
 
-                <select name="jobs" id="jobs">
-                  {spaceCats.map((data) => (
+                  <select name="jobs" id="jobs">
                     <option
-                      value={data.url_title}
-                      label={data.title}
-                      key={data.entry_id}
+                      defaultValue={"selected"}
+                      value="--"
+                      label="Job application"
                     >
-                      data?.title
+                      Job Application
                     </option>
-                  ))}
-                </select>
+                    {jobsData &&
+                      jobsData?.spaceCats.map((data) => (
+                        <option
+                          value={data.url_title}
+                          label={data.title}
+                          key={data.entry_id}
+                        >
+                          data?.title
+                        </option>
+                      ))}
+                    {jobsLoading && (
+                      <option label={"loading the available positions"}>
+                        ...loading the available positions
+                      </option>
+                    )}
+                    {jobsError && (
+                      <option label={"Error"}>Error: {jobsError}</option>
+                    )}
+                  </select>
 
-                <input type="submit" />
-              </form>
+                  <textarea
+                    defaultValue="Type your motivation here"
+                    {...register("Motivation")}
+                  />
+
+                  <FieldGroup>
+                    <input type="checkbox" {...register("Agree1")} />
+                    <p>
+                      I agree Technology Talents to store in its database the
+                      personal data I have provided and use it in order to offer
+                      me intermediary services to other partner employers for
+                      open job positions that are relevant to me.
+                    </p>
+                  </FieldGroup>
+
+                  <FieldGroup>
+                    <input type="checkbox" {...register("Agree2")} />
+                    <p>
+                      I accept the terms and conditions described in the{" "}
+                      <a href="https://technologytalents.io">Privacy Policy</a>
+                    </p>
+                  </FieldGroup>
+                  <input type="submit" />
+                </form>
+              </FormWrapper>
             </section>
           </SplitSection>
         </QueryResult>
@@ -159,11 +219,44 @@ const GetInTouch = () => {
 
 export default GetInTouch;
 
+const rounding = {
+  margin: "1em 0",
+  display: "block",
+  width: "96%",
+  borderRadius: 30,
+  outline: "none",
+  padding: "4px 8px",
+  border: `2px solid ${colors.formInputNormal}`,
+  ":focus": {
+    borderColor: colors.formInputFocus,
+  },
+};
+
+const FormWrapper = styled.section({
+  "input[type=text], input[type=email]": {
+    ...rounding,
+  },
+  textarea: {
+    ...rounding,
+  },
+  select: {
+    ...rounding,
+  },
+});
+
+const FieldGroup = styled("div")`
+  margin: 1em 0;
+  display: flex;
+"input[type=checkbox]" {
+'flex-basis': "30px";
+}
+`;
+
 const LogoBW = styled.img({
   width: 190,
   height: 41,
   display: "block",
-  margin: "1em auto 3em 3.5em",
+  margin: "1em auto 3em 28%",
 });
 
 const Icon = styled("img")`
@@ -171,9 +264,23 @@ const Icon = styled("img")`
   margin: 1em auto;
 `;
 
+const SocialFb = styled("img")`
+  display: block;
+  margin: 1em auto;
+  width: 123px;
+  height: 46px;
+`;
+
+const SocialIn = styled("img")`
+  display: block;
+  margin: 1em auto;
+  width: 134px;
+  height: 34px;
+`;
+
 const ContactTT = styled("img")`
   display: block;
   margin: 10px auto;
-  width: 304px;
-  height: 49px;
+  width: 284px;
+  height: 15px;
 `;

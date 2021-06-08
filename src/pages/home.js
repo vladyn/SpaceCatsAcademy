@@ -43,7 +43,10 @@ const Home = () => {
             buttonTwo={{ link: "/contact", label: "Contact Us" }}
             fullHeight
           />
-          <div dangerouslySetInnerHTML={{ __html: page_content_row }} />
+          <div
+            style={{ "text-align": "center" }}
+            dangerouslySetInnerHTML={{ __html: page_content_row }}
+          />
         </QueryResult>
       </ContentSection>
     </Layout>

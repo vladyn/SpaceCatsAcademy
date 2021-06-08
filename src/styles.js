@@ -31,6 +31,9 @@ export const colors = {
   cardHoverBgColor: "#f6f6e0",
   cardHoverBorderColor: "#E1E1B3",
   noColor: "transparent",
+  formInputNormal: "#C6C6C6",
+  formInputFocus: "#8DA9DC",
+  formSubmit: "#8DA9DC",
   ...SKColors,
 };
 
