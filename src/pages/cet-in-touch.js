@@ -76,16 +76,8 @@ const GetInTouch = () => {
 
   const [createEntry, { error: formError, loading: formLoading }] = useMutation(
     APPLY,
-    {
-      variables: {
-        input: {
-          channel_id: 3,
-        },
-      },
-    }
+    {}
   );
-
-  console.log(createEntry);
 
   const page_content_row_dirty = data?.getPage?.page_content_row;
   const page_content_row = DOMPurify.sanitize(page_content_row_dirty);
