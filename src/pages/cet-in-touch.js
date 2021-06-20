@@ -1,5 +1,5 @@
 import React from "react";
-import { useQuery, gql } from "@apollo/client";
+import { useQuery, useMutation, gql } from "@apollo/client";
 import { useForm } from "react-hook-form";
 import DOMPurify from "dompurify";
 import { Layout, ContentSection } from "../components";
@@ -53,6 +53,14 @@ const JOBS = gql`
   }
 `;
 
+const APPLY = gql`
+  mutation PostEntry($input: entryIntput) {
+    createEntry(input: $input) {
+      entry_id
+    }
+  }
+`;
+
 /** Get in Touch / Contact page */
 
 const GetInTouch = () => {
@@ -65,6 +73,19 @@ const GetInTouch = () => {
       page: "contact",
     },
   });
+
+  const [createEntry, { error: formError, loading: formLoading }] = useMutation(
+    APPLY,
+    {
+      variables: {
+        input: {
+          channel_id: 3,
+        },
+      },
+    }
+  );
+
+  console.log(createEntry);
 
   const page_content_row_dirty = data?.getPage?.page_content_row;
   const page_content_row = DOMPurify.sanitize(page_content_row_dirty);
@@ -84,7 +105,18 @@ const GetInTouch = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const onSubmit = (data) => console.log(data);
+  const onSubmit = (data) =>
+    createEntry({
+      variables: {
+        input: {
+          url_title: data.name.trim(),
+          entry_date: Date.now().toString(),
+          title: data?.name,
+          channel_id: 3,
+          ...data,
+        },
+      },
+    });
 
   return (
     <Layout fullWidth>
@@ -141,22 +173,24 @@ const GetInTouch = () => {
                   {/* register your input into the hook by invoking the "register" function */}
                   <input
                     type="text"
-                    defaultValue="Your name"
-                    {...register("name")}
+                    defaultValue=""
+                    placeholder="Your name"
+                    {...register("name", { required: true })}
                   />
+                  {/* errors will return when field validation fails  */}
+                  {errors.name && <span>This field is required</span>}
 
                   {/* include validation with required or other standard HTML validation rules */}
                   <input
                     type="email"
-                    defaultValue="Your E-mail"
-                    {...register("email", { required: true })}
+                    placeholder="Your e-mail"
+                    defaultValue=""
+                    {...register("mail", { required: true })}
                   />
                   {/* errors will return when field validation fails  */}
-                  {errors.exampleRequired && (
-                    <span>This field is required</span>
-                  )}
+                  {errors.mail && <span>This field is required</span>}
 
-                  <select name="jobs" id="jobs">
+                  <select name="jobs" id="jobs" {...register("job_position")}>
                     <option
                       defaultValue={"selected"}
                       value="--"
@@ -186,11 +220,11 @@ const GetInTouch = () => {
 
                   <textarea
                     defaultValue="Type your motivation here"
-                    {...register("Motivation")}
+                    {...register("motivation")}
                   />
 
                   <FieldGroup>
-                    <input type="checkbox" {...register("Agree1")} />
+                    <input type="checkbox" />
                     <p>
                       I agree Technology Talents to store in its database the
                       personal data I have provided and use it in order to offer
@@ -200,12 +234,14 @@ const GetInTouch = () => {
                   </FieldGroup>
 
                   <FieldGroup>
-                    <input type="checkbox" {...register("Agree2")} />
+                    <input type="checkbox" />
                     <p>
                       I accept the terms and conditions described in the{" "}
                       <a href="https://technologytalents.io">Privacy Policy</a>
                     </p>
                   </FieldGroup>
+                  {formLoading && <p>Loading...</p>}
+                  {formError && <p>Error :( Please try again</p>}
                   <input type="submit" />
                 </form>
               </FormWrapper>

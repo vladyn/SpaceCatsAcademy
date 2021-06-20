@@ -44,7 +44,7 @@ const Home = () => {
             fullHeight
           />
           <div
-            style={{ "text-align": "center" }}
+            style={{ textAlign: "center" }}
             dangerouslySetInnerHTML={{ __html: page_content_row }}
           />
         </QueryResult>
