@@ -236,6 +236,7 @@ const GetInTouch = () => {
                   <FieldGroup>
                     <input
                       type="checkbox"
+                      defaultValue="Yes"
                       {...register("terms", { required: true })}
                     />
                     <p>
