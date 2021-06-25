@@ -101,7 +101,7 @@ const GetInTouch = () => {
     createEntry({
       variables: {
         input: {
-          url_title: data.name.trim(),
+          url_title: data.name.replace(/\s/, "_"),
           entry_date: Date.now().toString(),
           title: data?.name,
           channel_id: 3,
@@ -211,12 +211,17 @@ const GetInTouch = () => {
                   </select>
 
                   <textarea
-                    defaultValue="Type your motivation here"
-                    {...register("motivation")}
+                    placeholder="Type your motivation here"
+                    defaultValue=""
+                    {...register("motivation", { required: true })}
                   />
 
                   <FieldGroup>
-                    <input type="checkbox" />
+                    <input
+                      type="checkbox"
+                      defaultValue="Yes"
+                      {...register("personal_data", { required: true })}
+                    />
                     <p>
                       I agree Technology Talents to store in its database the
                       personal data I have provided and use it in order to offer
@@ -224,14 +229,25 @@ const GetInTouch = () => {
                       open job positions that are relevant to me.
                     </p>
                   </FieldGroup>
+                  {errors.personal_data && (
+                    <p>You should confirm the personal data usage</p>
+                  )}
 
                   <FieldGroup>
-                    <input type="checkbox" />
+                    <input
+                      type="checkbox"
+                      {...register("terms", { required: true })}
+                    />
                     <p>
                       I accept the terms and conditions described in the{" "}
                       <a href="https://technologytalents.io">Privacy Policy</a>
                     </p>
                   </FieldGroup>
+                  {errors.terms && (
+                    <p>
+                      You should confirm you agree with our terms and conditions
+                    </p>
+                  )}
                   {formLoading && <p>Loading...</p>}
                   {formError && <p>Error :( Please try again</p>}
                   <input type="submit" />
