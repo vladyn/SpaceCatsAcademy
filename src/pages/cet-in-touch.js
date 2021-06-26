@@ -3,6 +3,7 @@ import { useQuery, useMutation, gql } from "@apollo/client";
 import { useForm } from "react-hook-form";
 import DOMPurify from "dompurify";
 import { Layout, ContentSection } from "../components";
+import { Button } from "@apollo/space-kit/Button";
 import PageHeadline from "../components/page-headline";
 import QueryResult from "../components/query-result";
 import MarkDown from "../components/md-content";
@@ -23,7 +24,7 @@ import contact2x from "../assets/contact@technologytalents@2x.png";
 import contact3x from "../assets/contact@technologytalents@3x.png";
 
 // Project specific styles
-import { colors } from "../styles";
+import { buttonSection, colors } from "../styles";
 
 /* The query */
 
@@ -95,7 +96,13 @@ const GetInTouch = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: {
+      errors,
+      isSubmitting,
+      isSubmitSuccessful,
+      isSubmitted,
+      touchedFields,
+    },
   } = useForm();
   const onSubmit = (data) =>
     createEntry({
@@ -109,6 +116,13 @@ const GetInTouch = () => {
         },
       },
     });
+
+  React.useEffect(() => {
+    console.log("touchedFields", touchedFields);
+    console.log("isSubmitting", isSubmitting);
+    console.log("isSubmitSuccessful", isSubmitSuccessful);
+    console.log("isSubmitted", isSubmitted);
+  }, [touchedFields, isSubmitting, isSubmitSuccessful, isSubmitted]);
 
   return (
     <Layout fullWidth>
@@ -170,7 +184,7 @@ const GetInTouch = () => {
                     {...register("name", { required: true })}
                   />
                   {/* errors will return when field validation fails  */}
-                  {errors.name && <span>This field is required</span>}
+                  {errors.name && <Error>This field is required</Error>}
 
                   {/* include validation with required or other standard HTML validation rules */}
                   <input
@@ -180,7 +194,7 @@ const GetInTouch = () => {
                     {...register("mail", { required: true })}
                   />
                   {/* errors will return when field validation fails  */}
-                  {errors.mail && <span>This field is required</span>}
+                  {errors.mail && <Error>This field is required</Error>}
 
                   <select name="jobs" id="jobs" {...register("job_position")}>
                     <option
@@ -230,7 +244,7 @@ const GetInTouch = () => {
                     </p>
                   </FieldGroup>
                   {errors.personal_data && (
-                    <p>You should confirm the personal data usage</p>
+                    <Error>You should confirm the personal data usage</Error>
                   )}
 
                   <FieldGroup>
@@ -245,14 +259,26 @@ const GetInTouch = () => {
                     </p>
                   </FieldGroup>
                   {errors.terms && (
-                    <p>
+                    <Error>
                       You should confirm you agree with our terms and conditions
-                    </p>
+                    </Error>
                   )}
                   {formLoading && <p>Loading...</p>}
                   {formError && <p>Error :( Please try again</p>}
-                  <input type="submit" />
+                  <FieldGroup>
+                    <ButtonWrapperTwo>
+                      <Button
+                        type="submit"
+                        aria-label="Submit the contact form"
+                      >
+                        SEND
+                      </Button>
+                    </ButtonWrapperTwo>
+                  </FieldGroup>
                 </form>
+                <FormSuccess done={isSubmitSuccessful}>
+                  <p>Thank you for contacting us. </p>
+                </FormSuccess>
               </FormWrapper>
             </section>
           </SplitSection>
@@ -287,14 +313,17 @@ const FormWrapper = styled.section({
   select: {
     ...rounding,
   },
+  position: "relative",
 });
 
 const FieldGroup = styled("div")`
   margin: 1em 0;
   display: flex;
-"input[type=checkbox]" {
-'flex-basis': "30px";
-}
+  align-content: center;
+  align-items: baseline;
+  & input[type="checkbox"] {
+    flex-basis: 40px;
+  }
 `;
 
 const LogoBW = styled.img({
@@ -328,4 +357,34 @@ const ContactTT = styled("img")`
   margin: 10px auto;
   width: 284px;
   height: 15px;
+`;
+
+const Error = styled("span")`
+  color: #61a48c;
+  display: inline-block;
+`;
+
+const ButtonWrapperTwo = styled.div({
+  marginTop: 20,
+  ...buttonSection("cardTypeOne"),
+  width: "94%",
+
+  "& button": {
+    width: "100%",
+  },
+});
+
+const FormSuccess = styled("div")`
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: beige;
+  opacity: 0.8;
+  color: black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  visibility: ${(props) => (props.done ? "visible" : "hidden")};
 `;
