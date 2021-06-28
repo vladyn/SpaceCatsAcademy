@@ -174,3 +174,5 @@ export { IconArrowRight } from "@apollo/space-kit/icons/IconArrowRight";
 export { IconDoubleArrowRight } from "@apollo/space-kit/icons/IconDoubleArrowRight";
 export { ApolloIcon } from "@apollo/space-kit/icons/ApolloIcon";
 export { Button } from "@apollo/space-kit/Button";
+export { IconInstagram } from "@apollo/space-kit/icons/IconInstagram";
+export { IconFacebook } from "@apollo/space-kit/icons/IconFacebook";

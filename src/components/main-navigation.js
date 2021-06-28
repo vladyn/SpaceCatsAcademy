@@ -1,21 +1,15 @@
 import React from "react";
 import styled from "@emotion/styled";
 import { Link } from "@reach/router";
-import {
-  colors,
-  // IconArrowRight,
-  // Button,
-  // IconDoubleArrowRight,
-  // IconRun,
-  // IconBook,
-} from "../styles";
+import { colors } from "../styles";
+import { mq } from "../styles";
 
 /**
  * Main navigation.
  * Displays few links with navigation functionality
  */
 
-const MainNavigation = (props) => {
+const MainNavigation = () => {
   return (
     <NavWrapper>
       <NavList>
@@ -51,7 +45,13 @@ const NavWrapper = styled.nav({
 
 const NavList = styled.ul({
   listStyle: "none",
-  display: "flex",
+  display: "block",
+  "& li": {
+    display: "block",
+    "& a": {
+      fontSize: "2em",
+    },
+  },
   flexDirection: "row",
   justifyContent: "flex-end",
   textTransform: "uppercase",
@@ -70,5 +70,15 @@ const NavList = styled.ul({
     fontWeight: "bold",
     fontFamily: "'Lato bold', sans-serif",
     borderBottom: `2px solid ${colors.mainNavHoverBorderColor}`,
+  },
+  // Mobile
+  [mq[1]]: {
+    display: "flex",
+    "& li": {
+      display: "block",
+      "& a": {
+        fontSize: 11,
+      },
+    },
   },
 });
