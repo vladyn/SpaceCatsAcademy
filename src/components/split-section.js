@@ -1,7 +1,7 @@
-import { Button } from "@apollo/space-kit/Button";
 import { useNavigate } from "@reach/router";
 import React from "react";
 import styled from "@emotion/styled";
+import { Button } from "@apollo/space-kit/Button";
 import { buttonSection } from "../styles";
 
 // import { widths, colors } from "../styles";
@@ -17,12 +17,13 @@ const SplitSection = ({
   iconRight,
   buttonOne,
   buttonTwo,
+  direction,
 }) => {
   const navigate = useNavigate();
   const jumpTo = (page) => navigate(page);
 
   return (
-    <ContentDiv iconLeft={iconLeft} iconRight={iconRight}>
+    <ContentDiv iconLeft={iconLeft} iconRight={iconRight} direction={direction}>
       {children}
 
       {buttonOne && (
@@ -48,7 +49,10 @@ export default SplitSection;
 
 const ContentDiv = styled.div((props) => ({
   display: "flex",
-  flexDirection: "row",
+  flexDirection: props.direction === "reverse" ? "row-reverse" : "row",
+  "@media (max-width: 799px)": {
+    flexDirection: "column-reverse",
+  },
   flexWrap: "wrap",
   width: "100%",
   "> div": {
@@ -70,6 +74,17 @@ const ContentDiv = styled.div((props) => ({
       paddingLeft: "1em",
     },
   },
+  aside: {
+    flexGrow: 0,
+    flexShrink: 4,
+    flexBasis: "40%",
+    textAlign: "center",
+  },
+  section: {
+    flexGrow: 5,
+    flexShrink: 4,
+    flexBasis: "60%",
+  },
   ...buttonSection(),
 }));
 
@@ -78,4 +93,5 @@ SplitSection.propTypes = {
   iconRight: PropTypes.string,
   buttonOne: PropTypes.object,
   buttonTwo: PropTypes.object,
+  direction: PropTypes.string,
 };

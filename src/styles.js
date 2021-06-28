@@ -11,7 +11,7 @@ export const unit = 8;
 export const widths = {
   largePageWidth: 1600,
   regularPageWidth: 1100,
-  textPageWitdh: 1100,
+  textPageWidth: 1100,
 };
 export const colors = {
   primary: SKColors.indigo.base,
@@ -31,6 +31,9 @@ export const colors = {
   cardHoverBgColor: "#f6f6e0",
   cardHoverBorderColor: "#E1E1B3",
   noColor: "transparent",
+  formInputNormal: "#C6C6C6",
+  formInputFocus: "#8DA9DC",
+  formSubmit: "#8DA9DC",
   ...SKColors,
 };
 
