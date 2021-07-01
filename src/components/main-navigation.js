@@ -1,10 +1,10 @@
-import React from "react";
-import styled from "@emotion/styled";
-import { Link } from "@reach/router";
-import { colors } from "../styles";
-import { mq } from "../styles";
-import { IconClose } from "@apollo/space-kit/icons/IconClose";
-import { IconMenu } from "@apollo/space-kit/icons/IconMenu";
+import React from 'react'
+import styled from '@emotion/styled'
+import { Link } from '@reach/router'
+import { colors } from '../styles'
+import { mq } from '../styles'
+import { IconClose } from '@apollo/space-kit/icons/IconClose'
+import { IconMenu } from '@apollo/space-kit/icons/IconMenu'
 
 /**
  * Main navigation.
@@ -12,17 +12,24 @@ import { IconMenu } from "@apollo/space-kit/icons/IconMenu";
  */
 
 const MainNavigation = () => {
+  let hamburger = true
+
+  const toggleMenu = () => {
+    hamburger = !hamburger
+    console.log(hamburger)
+  }
+
   return (
-    <NavWrapper id="menu">
-      <NavList>
+    <NavWrapper menuState={hamburger}>
+      {hamburger && <a href="#menu" className="menu-responsive" id="menu_open" onClick={toggleMenu}>
+        <IconMenu href="#menu"></IconMenu>
+      </a>}
+      <NavList id="menu">
         <li>
           <Link to="/">Home</Link>
-          <Link to="#" className="menu-responsive" id="menu_close">
+          <a href="#" className="menu-responsive" id="menu_close" onClick={toggleMenu}>
             <IconClose href="#" id="menu_close"></IconClose>
-          </Link>
-          <Link to="#menu" className="menu-responsive" id="menu_open">
-            <IconMenu href="#menu"></IconMenu>
-          </Link>
+          </a>
         </li>
         <li>
           <Link to="/about">About</Link>
@@ -41,81 +48,87 @@ const MainNavigation = () => {
         </li>
       </NavList>
     </NavWrapper>
-  );
-};
+  )
+}
 
-export default MainNavigation;
+export default MainNavigation
 
 /** Main navigation styles components */
-const NavWrapper = styled.nav({
+const NavWrapper = styled.nav(props => ({
+  '#menu_open': {
+    display: props?.menuState ? 'block' : 'none'
+  },
+
   [mq[1]]: {
-    flex: 1,
-    backgroundColor: "transparent",
-    width: "300px",
-    height: "200px",
-    display: "block",
-  },
-  display: "none",
-  ":target": {
-    display: "block",
-    backgroundColor: "rgba(255, 255, 255, 0.7)",
-    width: "97.5vw",
-    height: "92vh",
-  },
-});
+    display: 'flex',
+    justifyContent: "space-around",
+    '#menu_open': {
+      display: 'none'
+    }
+  }
+}))
 
 const NavList = styled.ul({
-  listStyle: "none",
-  display: "block",
-  "& li": {
-    border: "1px solid navy",
-    display: "flex",
-    justifyContent: "space-between",
-    "& a": {
-      fontSize: "2em",
+  // Responsive menu
+  listStyle: 'none',
+  display: 'none',
+
+  ':target': {
+    display: 'block',
+    backgroundColor: 'rgba(255, 255, 255, 0.7)',
+    width: '97.5vw',
+    height: '92vh'
+  },
+
+  '& li': {
+    display: 'flex',
+    justifyContent: 'space-between',
+    '& a': {
+      fontSize: '2em'
     },
 
     // on mobile show the hamburger menu icon
-    "& a#menu_open": {
-      display: "block",
-    },
+    '& a#menu_open': {
+      display: 'block'
+    }
   },
-  flexDirection: "row",
-  justifyContent: "flex-end",
-  textTransform: "uppercase",
+  flexDirection: 'row',
+  justifyContent: 'flex-end',
+  textTransform: 'uppercase',
   fontSize: 11,
   fontWeight: 800,
   a: {
-    textDecoration: "none",
+    textDecoration: 'none',
     color: colors.mainNavPrimary,
-    display: "block",
-    padding: "1px 12px 32px 12px",
-    border: "1px solid red",
+    display: 'block',
+    padding: '1px 12px 32px 12px'
   },
-  "a:hover": {
-    color: "#ABAC6C",
+  'a:hover': {
+    color: '#ABAC6C'
   },
   'a[aria-current="page"]': {
     color: colors.mainNavHoverBorderColor,
-    borderBottom: "none",
+    borderBottom: 'none'
   },
 
   // Desktop
   [mq[1]]: {
-    display: "flex",
-    "& li": {
-      display: "block",
-      "& a": {
-        fontSize: 11,
+    flex: 1,
+    backgroundColor: 'transparent',
+    display: 'flex',
+    '& li': {
+      display: 'block',
+      '& a': {
+        fontSize: 11
       },
-      "& .menu-responsive": {
-        display: "none",
-      },
+      '& .menu-responsive': {
+        display: 'none'
+      }
     },
     'a[aria-current="page"]': {
-      fontWeight: "bold",
-      fontFamily: "'Lato bold', sans-serif",
-      borderBottom: `2px solid ${colors.mainNavHoverBorderColor}`,
-    },
-  },
-});
+      fontWeight: 'bold',
+      fontFamily: '\'Lato bold\', sans-serif',
+      borderBottom: `2px solid ${colors.mainNavHoverBorderColor}`
+    }
+  }
+})
