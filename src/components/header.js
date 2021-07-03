@@ -11,7 +11,7 @@ import MainNavigation from "./main-navigation";
  * Header renders the top navigation
  * for this particular tutorial level, it only holds the home button
  */
-const Header = ({ children }) => {
+const Header = () => {
   return (
     <HeaderBar>
       <Container>
@@ -28,7 +28,6 @@ const Header = ({ children }) => {
             </HomeButton>
           </HomeLink>
         </HomeButtonContainer>
-        {children}
         <MainNavigation />
       </Container>
     </HeaderBar>
@@ -57,7 +56,7 @@ const Container = styled.div({
   width: `${widths.regularPageWidth}px`,
   display: "flex",
   flexDirection: "column",
-  justifyContent: "center",
+  justifyContent: "space-between",
   alignItems: "center",
   [mq[1]]: {
     alignItems: "start",
