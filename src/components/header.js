@@ -1,5 +1,5 @@
 import React from "react";
-import { colors, widths } from "../styles";
+import { colors, widths, mq } from "../styles";
 import styled from "@emotion/styled";
 import { Link } from "@reach/router";
 import logo from "../assets/tt_Logo.png";
@@ -11,7 +11,7 @@ import MainNavigation from "./main-navigation";
  * Header renders the top navigation
  * for this particular tutorial level, it only holds the home button
  */
-const Header = ({ children }) => {
+const Header = () => {
   return (
     <HeaderBar>
       <Container>
@@ -28,7 +28,6 @@ const Header = ({ children }) => {
             </HomeButton>
           </HomeLink>
         </HomeButtonContainer>
-        {children}
         <MainNavigation />
       </Container>
     </HeaderBar>
@@ -56,6 +55,13 @@ const HeaderBar = styled.div({
 const Container = styled.div({
   width: `${widths.regularPageWidth}px`,
   display: "flex",
+  flexDirection: "column",
+  justifyContent: "space-between",
+  alignItems: "center",
+  [mq[1]]: {
+    alignItems: "start",
+    flexDirection: "row",
+  },
 });
 
 const HomeLink = styled(Link)({
@@ -64,6 +70,10 @@ const HomeLink = styled(Link)({
 
 const HomeButtonContainer = styled.div({
   display: "flex",
+  [mq[1]]: {
+    margin: "18px 0 0 0",
+  },
+  margin: "18px 0 18px 0",
 });
 
 const HomeButton = styled.div({
@@ -87,7 +97,9 @@ const LogoContainer = styled.div({
 const Logo = styled.img({
   height: logoDimension.height,
   width: logoDimension.width,
-  marginRight: 8,
+  [mq[1]]: {
+    marginRight: 8,
+  },
 });
 
 const Title = styled.div({
