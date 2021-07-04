@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate } from "@reach/router";
-import { buttonHeadline } from "../styles";
+import { buttonHeadline, mq } from "../styles";
 import { Button } from "@apollo/space-kit/Button";
 import styled from "@emotion/styled";
 import PropTypes from "prop-types";
@@ -44,7 +44,11 @@ const Wrapper = styled.div((props) => ({
   textAlign: "center",
   display: props.verticallyAligned ? "flex" : "block",
   flexFlow: "column wrap",
-  paddingBottom: props.verticallyAligned ? "0" : "9em",
+  paddingBottom: props.verticallyAligned ? "0" : "4em",
+  [mq[1]]: {
+    paddingBottom: props.verticallyAligned ? "0" : "9em",
+
+  },
   alignItems: props.verticallyAligned ? "center" : "inherit",
   alignSelf: "center",
   justifyContent: props.verticallyAligned ? "center" : "inherit",

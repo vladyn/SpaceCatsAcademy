@@ -50,9 +50,6 @@ export default SplitSection;
 const ContentDiv = styled.div((props) => ({
   display: "flex",
   flexDirection: props.direction === "reverse" ? "row-reverse" : "row",
-  "@media (max-width: 799px)": {
-    flexDirection: "column-reverse",
-  },
   flexWrap: "wrap",
   width: "100%",
   "> div": {
@@ -72,6 +69,29 @@ const ContentDiv = styled.div((props) => ({
       backgroundPosition: "top left",
       backgroundRepeat: "no-repeat",
       paddingLeft: "1em",
+    },
+  },
+
+  "@media (max-width: 799px)": {
+    flexDirection: props.direction === "reverse" ? "column-reverse" : "column",
+    "> div": {
+      paddingTop: `${props.iconLeft || props.iconRight ? "80px" : "0px"}`,
+      display: "flex",
+      flexDirection: "column",
+      flexBasis: "100%",
+      flex: "1",
+      ":first-of-type": {
+        backgroundImage: `url(${props.iconLeft})`,
+        zIndex: 21,
+        backgroundPosition: "center -20px",
+        backgroundRepeat: "no-repeat",
+        paddingRight: 0,
+      },
+      ":last-child": {
+        backgroundImage: 'none',
+        paddingLeft: 0,
+        paddingTop: 0
+      },
     },
   },
   aside: {
