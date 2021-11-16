@@ -1,4 +1,4 @@
-# Topaz Pool group
+# Space cats Academy
 A client website based on Apollo's lift-off course companion app (completed)
 [Live Demo App](https://lift-off-client-demo.netlify.app/)
 
